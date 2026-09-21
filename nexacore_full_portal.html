@@ -1,0 +1,2148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NexaCore Technologies – Careers Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --ink:#0a0b0f;--paper:#f5f3ee;--surface:#ffffff;--warm:#f0ede6;
+  --accent:#1a1aff;--accent-light:#e8e8ff;--accent2:#ff4500;
+  --gold:#c9a84c;--success:#0d7a3e;--danger:#c0392b;
+  --border:#e2ddd6;--muted:#7a7568;--text:#1a1814;
+  --font:'Bricolage Grotesque',sans-serif;--mono:'DM Mono',monospace;--serif:'Lora',serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--paper);color:var(--text);min-height:100vh}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--border)}
+.hidden{display:none!important}
+.page{min-height:100vh}
+.btn{font-family:var(--font);font-weight:600;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem;text-decoration:none}
+.btn-primary{background:var(--accent);color:#fff;padding:13px 28px;border-radius:3px;font-size:.9rem;letter-spacing:.2px}
+.btn-primary:hover{background:#0000cc;transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--text);padding:12px 26px;border-radius:3px;font-size:.85rem}
+.btn-outline:hover{background:var(--text);color:var(--paper)}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 22px;border-radius:3px;font-size:.82rem}
+.btn-ghost:hover{border-color:var(--text);color:var(--text)}
+.btn-sm{padding:8px 18px;font-size:.78rem}
+.btn-success{background:var(--success);color:#fff;padding:12px 26px;border-radius:3px;font-size:.88rem;font-weight:700}
+.btn-danger{background:var(--danger);color:#fff;padding:10px 22px;border-radius:3px;font-size:.85rem}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:6px}
+.tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:2px;font-size:.7rem;font-weight:600;letter-spacing:.5px;font-family:var(--mono)}
+.tag-blue{background:var(--accent-light);color:var(--accent)}
+.tag-green{background:#e6f4ed;color:var(--success)}
+.tag-orange{background:#fff0eb;color:var(--accent2)}
+.tag-gold{background:#fdf8ee;color:var(--gold);border:1px solid #e8d9a0}
+.tag-red{background:#fdf0ee;color:var(--danger)}
+.tag-gray{background:var(--warm);color:var(--muted)}
+.fade-in{animation:fadeUp .4s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.pulse{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ══════ TOP NAV ══════ */
+.topnav{background:var(--ink);color:#fff;padding:.65rem 0;text-align:center;font-size:.72rem;font-family:var(--mono);letter-spacing:1px}
+.topnav span{color:var(--gold)}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 4rem;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100}
+.logo{font-weight:800;font-size:1.2rem;letter-spacing:-1px;color:var(--ink)}
+.logo em{font-style:normal;color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-link{font-size:.85rem;color:var(--muted);text-decoration:none;font-weight:500;transition:color .2s}
+.nav-link:hover,.nav-link.active{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:.75rem}
+.notification-bell{position:relative;cursor:pointer;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s}
+.notification-bell:hover{background:var(--warm)}
+.notif-badge{position:absolute;top:4px;right:4px;width:16px;height:16px;border-radius:50%;background:var(--danger);color:#fff;font-size:.55rem;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface)}
+.user-pill{display:flex;align-items:center;gap:.5rem;padding:4px 12px 4px 4px;border:1px solid var(--border);border-radius:20px;cursor:pointer;transition:background .2s}
+.user-pill:hover{background:var(--warm)}
+.user-avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700}
+.user-name{font-size:.78rem;font-weight:600}
+
+/* ══════ NOTIFICATION PANEL ══════ */
+.notif-panel{position:fixed;top:70px;right:1.5rem;width:380px;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 32px rgba(0,0,0,.12);z-index:200;max-height:500px;overflow-y:auto}
+.notif-header{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.notif-title{font-weight:700;font-size:.9rem}
+.notif-item{padding:.9rem 1.25rem;border-bottom:1px solid var(--border);display:flex;gap:.75rem;cursor:pointer;transition:background .2s}
+.notif-item:hover{background:var(--warm)}
+.notif-item.unread{background:#f0f0ff}
+.notif-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.notif-text{font-size:.8rem;line-height:1.5;color:var(--text)}
+.notif-time{font-size:.68rem;color:var(--muted);font-family:var(--mono);margin-top:.2rem}
+
+/* ══════ HERO / JOB LISTING ══════ */
+.hero-section{background:var(--ink);color:#fff;padding:5rem 4rem 4rem;position:relative;overflow:hidden}
+.hero-section::before{content:'';position:absolute;top:0;right:0;width:50%;height:100%;background:linear-gradient(135deg,transparent,rgba(26,26,255,.1));pointer-events:none}
+.hero-eyebrow{font-family:var(--mono);font-size:.72rem;color:var(--gold);letter-spacing:3px;margin-bottom:1.25rem}
+.hero-h1{font-size:clamp(2.2rem,5vw,4rem);font-weight:800;line-height:1.1;letter-spacing:-2px;margin-bottom:1.25rem;max-width:700px}
+.hero-h1 em{font-style:italic;font-family:var(--serif);color:var(--gold)}
+.hero-sub{color:rgba(255,255,255,.6);max-width:540px;line-height:1.8;font-size:1rem;margin-bottom:2.5rem}
+.hero-stats{display:flex;gap:3rem}
+.hero-stat strong{display:block;font-size:1.8rem;font-weight:800;color:var(--gold)}
+.hero-stat span{font-size:.75rem;color:rgba(255,255,255,.5);font-family:var(--mono);letter-spacing:1px}
+
+/* ══════ JOB LISTINGS ══════ */
+.jobs-section{padding:3rem 4rem}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.section-title{font-size:1.3rem;font-weight:700;letter-spacing:-.5px}
+.filter-bar{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.filter-chip{background:var(--warm);border:1px solid var(--border);padding:5px 14px;border-radius:20px;font-size:.75rem;cursor:pointer;transition:all .2s;font-weight:500}
+.filter-chip.active,.filter-chip:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.jobs-grid{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.job-card{background:var(--surface);padding:1.5rem;display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;transition:background .2s;cursor:pointer}
+.job-card:hover{background:var(--warm)}
+.job-title{font-weight:700;font-size:1.05rem;margin-bottom:.4rem}
+.job-meta{display:flex;gap:1rem;font-size:.78rem;color:var(--muted);flex-wrap:wrap;align-items:center}
+.job-dot{width:4px;height:4px;border-radius:50%;background:var(--border)}
+.job-tags{display:flex;gap:.4rem;margin-top:.6rem;flex-wrap:wrap}
+.job-ctc{text-align:right}
+.job-ctc strong{display:block;font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--accent)}
+.job-ctc span{font-size:.72rem;color:var(--muted)}
+.job-deadline{font-size:.72rem;color:var(--danger);font-family:var(--mono);margin-top:.25rem}
+
+/* ══════ APPLICATION FORM ══════ */
+.app-layout{display:flex;min-height:calc(100vh - 105px)}
+.app-sidebar{width:280px;background:var(--warm);border-right:1px solid var(--border);padding:2rem 1.5rem;flex-shrink:0;position:sticky;top:105px;height:calc(100vh - 105px);overflow-y:auto}
+.app-sidebar h3{font-size:.8rem;font-weight:700;letter-spacing:1px;color:var(--muted);margin-bottom:1rem;font-family:var(--mono)}
+.step-list{display:flex;flex-direction:column;gap:.25rem}
+.step-item{display:flex;align-items:center;gap:.75rem;padding:.6rem .75rem;border-radius:4px;font-size:.82rem;font-weight:500;transition:all .2s;color:var(--muted)}
+.step-item.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.step-item.done{color:var(--success)}
+.step-item.locked{color:var(--border)}
+.step-num{width:24px;height:24px;border-radius:50%;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;font-family:var(--mono)}
+.step-num.done-bg{background:var(--success);border-color:var(--success);color:#fff}
+.app-main{flex:1;padding:2.5rem 3rem;max-width:760px}
+.form-section{margin-bottom:2rem}
+.form-section-title{font-size:.72rem;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border);font-family:var(--mono)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem}
+.form-group{margin-bottom:1rem}
+.form-label{display:block;font-size:.78rem;font-weight:600;color:var(--text);margin-bottom:.4rem}
+.form-label .req{color:var(--danger)}
+.form-input,.form-select,.form-textarea{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:4px;padding:.65rem .9rem;color:var(--text);font-family:var(--font);font-size:.88rem;outline:none;transition:border .2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--accent)}
+.form-textarea{resize:vertical;line-height:1.6}
+.form-hint{font-size:.72rem;color:var(--muted);margin-top:.3rem;line-height:1.5}
+.upload-box{border:2px dashed var(--border);border-radius:6px;padding:2rem;text-align:center;cursor:pointer;transition:all .2s;background:var(--warm)}
+.upload-box:hover{border-color:var(--accent);background:var(--accent-light)}
+.upload-box .upload-icon{font-size:2rem;margin-bottom:.5rem}
+.upload-box p{font-size:.82rem;color:var(--muted);line-height:1.6}
+.upload-box strong{color:var(--accent)}
+.upload-done{border-color:var(--success);background:#e6f4ed}
+.skills-input-wrap{display:flex;flex-wrap:wrap;gap:.4rem;padding:.5rem;border:1.5px solid var(--border);border-radius:4px;min-height:44px;cursor:text;background:var(--surface)}
+.skill-tag{background:var(--accent-light);color:var(--accent);padding:3px 10px;border-radius:2px;font-size:.75rem;font-weight:600;display:flex;align-items:center;gap:.3rem}
+.skill-tag button{background:none;border:none;cursor:pointer;color:var(--accent);font-size:.8rem;line-height:1;padding:0}
+.skill-input-field{border:none;outline:none;font-family:var(--font);font-size:.85rem;background:transparent;min-width:120px;flex:1}
+.progress-steps{display:flex;align-items:center;gap:0;margin-bottom:2rem}
+.pstep{flex:1;text-align:center;font-size:.7rem;font-weight:600;color:var(--muted);font-family:var(--mono);position:relative}
+.pstep::before{content:'';position:absolute;top:12px;left:50%;right:-50%;height:2px;background:var(--border);z-index:0}
+.pstep:last-child::before{display:none}
+.pstep-dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);background:var(--surface);margin:0 auto .4rem;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;position:relative;z-index:1}
+.pstep.active .pstep-dot{border-color:var(--accent);background:var(--accent);color:#fff}
+.pstep.done .pstep-dot{border-color:var(--success);background:var(--success);color:#fff}
+.pstep.active{color:var(--text)}
+.pstep.done{color:var(--success)}
+
+/* ══════ TIMELINE / DASHBOARD ══════ */
+.candidate-dashboard{padding:2rem 4rem}
+.dash-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.dash-greeting{font-size:1.5rem;font-weight:800;letter-spacing:-.5px}
+.dash-sub{color:var(--muted);font-size:.88rem;margin-top:.25rem}
+.dash-grid{display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start}
+.timeline-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.5rem}
+.timeline-title{font-weight:700;font-size:.95rem;margin-bottom:1.5rem;display:flex;align-items:center;justify-content:space-between}
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:.65rem;top:.5rem;bottom:.5rem;width:2px;background:var(--border)}
+.tl-item{position:relative;margin-bottom:1.5rem;padding-left:.75rem}
+.tl-dot{position:absolute;left:-2rem;top:.15rem;width:14px;height:14px;border-radius:50%;border:2px solid var(--border);background:var(--surface);z-index:1;display:flex;align-items:center;justify-content:center}
+.tl-dot.done{background:var(--success);border-color:var(--success)}
+.tl-dot.active{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-light)}
+.tl-dot.pending{background:var(--surface);border-color:var(--border)}
+.tl-dot.rejected{background:var(--danger);border-color:var(--danger)}
+.tl-title{font-weight:700;font-size:.88rem}
+.tl-sub{font-size:.78rem;color:var(--muted);margin-top:.2rem;line-height:1.5}
+.tl-date{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-top:.3rem}
+.tl-badge{display:inline-block;margin-top:.4rem}
+.tl-action{margin-top:.6rem}
+.status-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem;margin-bottom:1rem}
+.status-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.status-title{font-weight:700;font-size:.85rem}
+.app-id{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+.score-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem;font-size:.8rem}
+.score-bar-wrap{flex:1;margin:0 .75rem;height:5px;background:var(--warm);border-radius:3px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:3px;background:var(--accent)}
+.score-val{font-family:var(--mono);font-size:.72rem;font-weight:600;width:30px;text-align:right}
+.email-preview{background:var(--warm);border:1px solid var(--border);border-radius:6px;padding:1.25rem;margin-top:1rem}
+.email-from{font-size:.72rem;color:var(--muted);font-family:var(--mono);margin-bottom:.4rem}
+.email-subject{font-weight:700;font-size:.88rem;margin-bottom:.6rem}
+.email-body{font-size:.8rem;color:var(--text);line-height:1.7}
+
+/* ══════ INBOX ══════ */
+.inbox-layout{display:flex;min-height:calc(100vh - 105px)}
+.inbox-list{width:320px;border-right:1px solid var(--border);flex-shrink:0}
+.inbox-header{padding:1.25rem;border-bottom:1px solid var(--border);font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:space-between}
+.inbox-item{padding:1rem 1.25rem;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s}
+.inbox-item:hover{background:var(--warm)}
+.inbox-item.active{background:var(--accent-light);border-left:3px solid var(--accent)}
+.inbox-item.unread .inbox-sender{font-weight:700}
+.inbox-sender{font-size:.82rem;color:var(--text)}
+.inbox-subject{font-size:.78rem;color:var(--muted);margin-top:.15rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inbox-time{font-size:.65rem;color:var(--muted);font-family:var(--mono)}
+.inbox-unread-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.email-view{flex:1;padding:2rem;overflow-y:auto}
+.email-view-header{border-bottom:1px solid var(--border);padding-bottom:1.25rem;margin-bottom:1.5rem}
+.email-view-subject{font-size:1.2rem;font-weight:700;margin-bottom:.75rem}
+.email-meta-row{display:flex;align-items:center;gap:1rem;font-size:.78rem;color:var(--muted)}
+.email-avatar-sm{width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0}
+.email-full-body{font-size:.88rem;line-height:1.9;color:var(--text)}
+.email-full-body p{margin-bottom:.9rem}
+.email-full-body .highlight-box{background:var(--accent-light);border:1px solid var(--accent);border-radius:4px;padding:.9rem 1.1rem;margin:1rem 0}
+.email-full-body .cta-box{background:var(--ink);color:#fff;border-radius:4px;padding:1.25rem;margin:1rem 0;text-align:center}
+.email-signature{border-top:1px solid var(--border);padding-top:1rem;margin-top:1.5rem;font-size:.78rem;color:var(--muted);line-height:1.7}
+
+/* ══════ TEST PAGES ══════ */
+.test-nav{background:var(--ink);color:#fff;padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.test-nav-title{font-weight:700;font-size:.9rem}
+.test-timer{font-family:var(--mono);font-size:1.1rem;background:rgba(255,255,255,.1);padding:5px 16px;border-radius:3px}
+.test-timer.warn{background:rgba(245,158,11,.2);color:#f59e0b}
+.test-timer.danger{background:rgba(192,57,43,.2);color:#ff6b6b;animation:timerPulse .5s infinite}
+@keyframes timerPulse{0%,100%{opacity:1}50%{opacity:.6}}
+.test-body{display:flex;flex:1}
+.test-sidebar{width:260px;background:var(--warm);border-right:1px solid var(--border);padding:1.25rem;overflow-y:auto}
+.qdots{display:grid;grid-template-columns:repeat(8,1fr);gap:4px}
+.qdot{width:28px;height:28px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;cursor:pointer;border:1px solid var(--border);background:var(--surface);font-family:var(--mono);transition:all .15s}
+.qdot.cur{border-color:var(--accent);color:var(--accent)}
+.qdot.ans{background:var(--accent);color:#fff;border-color:var(--accent)}
+.qdot.flag{background:#fff8e1;border-color:#f59e0b;color:#d97706}
+.qdot.neg{background:#fff5f5;border-color:#fecaca}
+.qmain{flex:1;padding:2rem;overflow-y:auto;max-width:740px}
+.qcard{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.5rem;margin-bottom:1rem}
+.qtext{font-size:1rem;line-height:1.75;margin-bottom:1.25rem;font-weight:500}
+.opts{display:flex;flex-direction:column;gap:.5rem}
+.opt{display:flex;align-items:flex-start;gap:.75rem;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:4px;cursor:pointer;transition:all .2s;background:var(--surface)}
+.opt:hover{border-color:var(--accent);background:var(--accent-light)}
+.opt.sel{border-color:var(--accent);background:var(--accent-light)}
+.optkey{width:26px;height:26px;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;font-family:var(--mono);background:var(--warm);color:var(--muted);flex-shrink:0}
+.opt.sel .optkey{background:var(--accent);color:#fff}
+
+/* ══════ CODE EDITOR ══════ */
+.code-layout{display:flex;flex:1;min-height:0}
+.prob-panel{width:380px;border-right:1px solid var(--border);overflow-y:auto;flex-shrink:0}
+.prob-inner{padding:1.5rem}
+.prob-h{font-weight:800;font-size:1.05rem;margin-bottom:.75rem}
+.prob-desc{font-size:.85rem;line-height:1.75;color:var(--muted)}
+.prob-desc strong{color:var(--text)}
+.prob-desc code{background:var(--warm);padding:1px 6px;border-radius:2px;font-family:var(--mono);font-size:.82rem}
+.ex-box{background:var(--warm);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;padding:.75rem 1rem;margin:.75rem 0;font-family:var(--mono);font-size:.78rem}
+.editor-wrap{flex:1;display:flex;flex-direction:column}
+.editor-top{background:var(--ink);padding:.5rem 1rem;display:flex;align-items:center;gap:1rem}
+.lang-sel{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;padding:4px 10px;border-radius:3px;font-family:var(--mono);font-size:.75rem}
+.codebox{flex:1;background:#0d1117;overflow:auto;position:relative}
+.code-ta{width:100%;height:100%;background:transparent;color:#e2e8f0;font-family:var(--mono);font-size:.83rem;border:none;outline:none;padding:1.25rem;resize:none;line-height:1.75;tab-size:2}
+.output-box{height:180px;background:#050810;border-top:2px solid var(--border);padding:1rem;font-family:var(--mono);font-size:.78rem;overflow-y:auto}
+.ol{margin-bottom:.2rem;line-height:1.5}
+.ol.p{color:#4ade80}.ol.f{color:#f87171}.ol.i{color:#6b7280}.ol.s{color:#60a5fa}
+
+/* ══════ HR INTERVIEW ══════ */
+.hr-wrap{display:flex;flex:1;min-height:0}
+.hr-left{width:320px;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--warm)}
+.vid-wrap{background:#000;aspect-ratio:4/3;position:relative;overflow:hidden}
+.vid-wrap video{width:100%;height:100%;object-fit:cover}
+.live-badge{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.7);color:#f87171;font-family:var(--mono);font-size:.6rem;padding:3px 8px;border-radius:2px;display:flex;align-items:center;gap:.3rem}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#f87171;animation:pulse 1s infinite}
+.mood-panel{padding:1rem}
+.mood-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:2px;color:var(--muted);margin-bottom:.75rem}
+.mrow{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
+.mlabel{font-size:.72rem;width:75px;color:var(--muted)}
+.mtrack{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.mfill{height:100%;border-radius:2px;transition:width .6s ease}
+.mval{font-family:var(--mono);font-size:.62rem;color:var(--muted);width:26px;text-align:right}
+.dom-mood{background:var(--surface);border-radius:4px;border:1px solid var(--border);padding:.75rem;margin-top:.75rem}
+.dom-mood-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:2px;color:var(--muted);margin-bottom:.25rem}
+.dom-mood-val{font-weight:800;font-size:1rem}
+.mood-log{flex:1;overflow-y:auto;padding:.75rem;border-top:1px solid var(--border);max-height:160px}
+.mlog{font-family:var(--mono);font-size:.63rem;color:var(--muted);margin-bottom:.25rem;line-height:1.4}
+.mlog span{color:var(--accent)}
+.hr-right{flex:1;display:flex;flex-direction:column}
+.hr-chat-head{padding:1rem 1.5rem;border-bottom:1px solid var(--border);background:var(--surface);display:flex;align-items:center;gap:.75rem}
+.hr-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#3b82f6);display:flex;align-items:center;justify-content:center;font-size:1.2rem;position:relative;flex-shrink:0}
+.hr-av::after{content:'';position:absolute;bottom:2px;right:2px;width:10px;height:10px;border-radius:50%;background:var(--success);border:2px solid var(--surface)}
+.chat-msgs{flex:1;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.cmsg{display:flex;gap:.65rem;max-width:82%}
+.cmsg.ai{align-self:flex-start}
+.cmsg.user{align-self:flex-end;flex-direction:row-reverse}
+.cav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
+.cav.ai{background:linear-gradient(135deg,#6366f1,#3b82f6);color:#fff}
+.cav.user{background:var(--warm);border:1px solid var(--border);color:var(--muted)}
+.cbubble{padding:.7rem .95rem;border-radius:6px;font-size:.85rem;line-height:1.65}
+.cbubble.ai{background:var(--surface);border:1px solid var(--border)}
+.cbubble.user{background:var(--accent-light);border:1px solid rgba(26,26,255,.2);color:var(--text)}
+.cmeta{font-size:.62rem;color:var(--muted);margin-top:.2rem;display:flex;align-items:center;gap:.4rem}
+.mbadge{display:inline-block;padding:1px 6px;border-radius:2px;font-size:.58rem;font-weight:600;font-family:var(--mono)}
+.typing-ind{display:flex;gap:3px;align-items:center;padding:.65rem .95rem;background:var(--surface);border:1px solid var(--border);border-radius:6px}
+.td{width:5px;height:5px;border-radius:50%;background:var(--muted);animation:dotBounce .8s infinite}
+.td:nth-child(2){animation-delay:.15s}.td:nth-child(3){animation-delay:.3s}
+@keyframes dotBounce{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-4px);opacity:1}}
+.chat-in-area{padding:.9rem 1.25rem;border-top:1px solid var(--border);background:var(--warm);display:flex;gap:.65rem;align-items:flex-end}
+.chat-ta{flex:1;background:var(--surface);border:1.5px solid var(--border);border-radius:4px;padding:.65rem .9rem;font-family:var(--font);font-size:.85rem;resize:none;outline:none;transition:border .2s;max-height:100px}
+.chat-ta:focus{border-color:var(--accent)}
+.send-btn{background:var(--accent);color:#fff;border:none;width:38px;height:38px;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;font-size:1rem}
+.send-btn:hover{background:#0000cc}
+.send-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* ══════ ONBOARDING ══════ */
+.onboard-hero{background:linear-gradient(135deg,var(--success) 0%,#065f34 100%);color:#fff;padding:3rem 4rem;text-align:center}
+.onboard-hero h1{font-size:2.5rem;font-weight:800;letter-spacing:-1px;margin-bottom:.5rem}
+.onboard-hero p{opacity:.85;font-size:1rem}
+.onboard-body{padding:2rem 4rem;max-width:900px;margin:0 auto}
+.onboard-progress{display:flex;gap:0;margin-bottom:2.5rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.op-step{flex:1;padding:.9rem;text-align:center;font-size:.72rem;font-weight:600;font-family:var(--mono);color:var(--muted);border-right:1px solid var(--border);transition:all .3s;cursor:pointer}
+.op-step:last-child{border-right:none}
+.op-step.done{background:var(--success);color:#fff}
+.op-step.active{background:var(--accent);color:#fff}
+.onboard-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.oc{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.25rem;transition:all .2s}
+.oc:hover{border-color:var(--accent);box-shadow:0 2px 12px rgba(26,26,255,.08)}
+.oc.done-card{border-color:var(--success);background:#f8fff9}
+.oc-icon{font-size:1.8rem;margin-bottom:.75rem}
+.oc-title{font-weight:700;font-size:.9rem;margin-bottom:.3rem}
+.oc-desc{font-size:.78rem;color:var(--muted);line-height:1.6;margin-bottom:.9rem}
+.oc-progress{height:4px;background:var(--warm);border-radius:2px;overflow:hidden;margin-bottom:.75rem}
+.oc-prog-fill{height:100%;background:var(--success);border-radius:2px;transition:width .5s}
+.checklist{display:flex;flex-direction:column;gap:.4rem}
+.check-item{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:var(--muted);cursor:pointer}
+.check-item.done-item{color:var(--success)}
+.checkbox{width:16px;height:16px;border-radius:3px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;transition:all .2s}
+.check-item.done-item .checkbox{background:var(--success);border-color:var(--success);color:#fff}
+
+/* ══════ ALERT TOAST ══════ */
+.toast-container{position:fixed;top:80px;right:1.5rem;z-index:1000;display:flex;flex-direction:column;gap:.5rem;pointer-events:none}
+.toast{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.9rem 1.25rem;display:flex;align-items:flex-start;gap:.75rem;box-shadow:0 4px 20px rgba(0,0,0,.12);pointer-events:all;animation:toastIn .3s ease;max-width:340px}
+@keyframes toastIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.toast.hide{animation:toastOut .3s ease forwards}
+@keyframes toastOut{to{opacity:0;transform:translateX(20px)}}
+.toast-icon{font-size:1.2rem;flex-shrink:0}
+.toast-text{flex:1}
+.toast-title{font-weight:700;font-size:.82rem;margin-bottom:.15rem}
+.toast-sub{font-size:.75rem;color:var(--muted);line-height:1.4}
+.toast-close{background:none;border:none;cursor:pointer;color:var(--muted);font-size:.9rem;padding:0}
+
+/* ══════ FINAL DECISION ══════ */
+.decision-page{max-width:700px;margin:0 auto;padding:3rem 2rem;text-align:center}
+.decision-emoji{font-size:4rem;margin-bottom:1rem;display:block}
+.decision-title{font-size:2.2rem;font-weight:800;letter-spacing:-1px;margin-bottom:.5rem}
+.offer-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2rem;text-align:left;margin:1.5rem 0}
+.offer-row{display:flex;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid var(--border);font-size:.88rem}
+.offer-row:last-child{border:none}
+
+/* ══════ RESPONSIVE ══════ */
+@media(max-width:768px){
+  nav{padding:0 1rem}
+  .hero-section,.jobs-section,.candidate-dashboard,.onboard-body{padding-left:1.5rem;padding-right:1.5rem}
+  .app-sidebar{display:none}
+  .dash-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .onboard-cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ TOAST CONTAINER ══ -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- ══ NOTIFICATION PANEL ══ -->
+<div class="notif-panel hidden" id="notif-panel">
+  <div class="notif-header">
+    <span class="notif-title">Notifications</span>
+    <button onclick="clearNotifs()" style="background:none;border:none;font-size:.75rem;color:var(--accent);cursor:pointer">Mark all read</button>
+  </div>
+  <div id="notif-list"></div>
+</div>
+
+<!-- ══ TOP BANNER ══ -->
+<div class="topnav">Campus Recruitment Drive 2025 is LIVE · Applications close <span>July 31, 2025</span> · 200+ openings across SDE, DS, PM, Design</div>
+
+<!-- ══ NAV ══ -->
+<nav id="main-nav">
+  <div class="logo">Nexa<em>Core</em></div>
+  <div class="nav-links">
+    <a class="nav-link active" href="#" onclick="goTo('jobs');return false">Jobs</a>
+    <a class="nav-link" href="#" onclick="goTo('dashboard');return false" id="nav-dashboard" style="display:none">My Application</a>
+    <a class="nav-link" href="#" onclick="goTo('inbox');return false" id="nav-inbox" style="display:none">Inbox</a>
+    <a class="nav-link" href="#" onclick="goTo('onboarding');return false" id="nav-onboard" style="display:none">Onboarding</a>
+  </div>
+  <div class="nav-right">
+    <div class="notification-bell" onclick="toggleNotifPanel()" id="notif-bell" style="display:none">
+      🔔
+      <div class="notif-badge" id="notif-badge">0</div>
+    </div>
+    <div class="user-pill hidden" id="user-pill">
+      <div class="user-avatar" id="user-av-initials">?</div>
+      <span class="user-name" id="user-pill-name">Guest</span>
+    </div>
+    <button class="btn btn-primary btn-sm" onclick="goTo('jobs')" id="btn-signin" style="display:none">Sign In</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: JOBS
+══════════════════════════════════════════════ -->
+<div id="page-jobs" class="page">
+  <div class="hero-section">
+    <div class="hero-eyebrow">NEXACORE TECHNOLOGIES · CAREERS</div>
+    <h1 class="hero-h1">Build the Future.<br/><em>Start Here.</em></h1>
+    <p class="hero-sub">We're hiring across engineering, data science, product, and design. Join 4,000+ engineers solving problems at planetary scale.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><strong>₹8–24L</strong><span>CTC RANGE</span></div>
+      <div class="hero-stat"><strong>11</strong><span>OPEN ROLES</span></div>
+      <div class="hero-stat"><strong>48h</strong><span>RESULT TIME</span></div>
+      <div class="hero-stat"><strong>0</strong><span>BOND PERIOD</span></div>
+    </div>
+  </div>
+  <div class="jobs-section">
+    <div class="section-header">
+      <span class="section-title">Open Positions</span>
+      <span style="font-size:.78rem;color:var(--muted);font-family:var(--mono)">Showing 6 of 200+ roles</span>
+    </div>
+    <div class="filter-bar" id="filter-bar">
+      <div class="filter-chip active" onclick="filterJobs('all',this)">All Roles</div>
+      <div class="filter-chip" onclick="filterJobs('Engineering',this)">Engineering</div>
+      <div class="filter-chip" onclick="filterJobs('Data',this)">Data & Analytics</div>
+      <div class="filter-chip" onclick="filterJobs('Artificial',this)">AI / ML</div>
+      <div class="filter-chip" onclick="filterJobs('Product',this)">Product</div>
+      <div class="filter-chip" onclick="filterJobs('Design',this)">Design</div>
+    </div>
+    <div class="jobs-grid">
+      <div class="job-card" onclick="openJobDetail('sde1')">
+        <div>
+          <div class="job-title">Software Development Engineer – I</div>
+          <div class="job-meta">
+            <span>Engineering</span><div class="job-dot"></div>
+            <span>Bengaluru / Remote</span><div class="job-dot"></div>
+            <span>Full-time</span>
+          </div>
+          <div class="job-tags">
+            <span class="tag tag-blue">Fresher OK</span>
+            <span class="tag tag-gray">0–2 yrs</span>
+            <span class="tag tag-gold">Campus Drive</span>
+          </div>
+        </div>
+        <div class="job-ctc">
+          <strong>₹18–22 LPA</strong>
+          <span>incl. stock options</span>
+          <div class="job-deadline">Closes Jul 31</div>
+        </div>
+      </div>
+      <div class="job-card" onclick="openJobDetail('ds')">
+        <div>
+          <div class="job-title">Data Scientist – ML Platform</div>
+          <div class="job-meta"><span>Data Science</span><div class="job-dot"></div><span>Hyderabad</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Fresher OK</span><span class="tag tag-gray">0–1 yr</span><span class="tag tag-gold">Campus Drive</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹16–20 LPA</strong><span>incl. ESOPs</span><div class="job-deadline">Closes Jul 31</div></div>
+      </div>
+      <div class="job-card" onclick="openJobDetail('pm')">
+        <div>
+          <div class="job-title">Associate Product Manager</div>
+          <div class="job-meta"><span>Product</span><div class="job-dot"></div><span>Bengaluru</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Fresher OK</span><span class="tag tag-gray">MBA preferred</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹14–18 LPA</strong><span>+ performance bonus</span><div class="job-deadline">Closes Aug 5</div></div>
+      </div>
+      <div class="job-card" onclick="openJobDetail('devops')">
+        <div>
+          <div class="job-title">DevOps Engineer – Cloud Infrastructure</div>
+          <div class="job-meta"><span>Engineering</span><div class="job-dot"></div><span>Remote India</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Fresher OK</span><span class="tag tag-gray">0–2 yrs</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹15–19 LPA</strong><span>incl. stock</span><div class="job-deadline">Closes Aug 10</div></div>
+      </div>
+      <div class="job-card" onclick="openJobDetail('ux')">
+        <div>
+          <div class="job-title">UX Designer – Consumer Products</div>
+          <div class="job-meta"><span>Design</span><div class="job-dot"></div><span>Bengaluru</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Portfolio Required</span><span class="tag tag-gray">0–2 yrs</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹12–16 LPA</strong><span>+ signing bonus</span><div class="job-deadline">Closes Aug 15</div></div>
+      </div>
+      <div class="job-card" onclick="openJobDetail('sre')">
+        <div>
+          <div class="job-title">Site Reliability Engineer</div>
+          <div class="job-meta"><span>Engineering</span><div class="job-dot"></div><span>Pune / Remote</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Fresher OK</span><span class="tag tag-gray">CS/IT only</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹17–21 LPA</strong><span>incl. ESOPs</span><div class="job-deadline">Closes Aug 20</div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetail('da')">
+        <div>
+          <div class="job-title">Data Analyst – Business Intelligence</div>
+          <div class="job-meta"><span>Data & Analytics</span><div class="job-dot"></div><span>Bengaluru / Hybrid</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Fresher OK</span><span class="tag tag-gray">0–1 yr</span><span class="tag tag-gold">Campus Drive</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹8–12 LPA</strong><span>+ performance bonus</span><div class="job-deadline">Closes Aug 5</div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetail('dsc')">
+        <div>
+          <div class="job-title">Data Scientist – AI Research</div>
+          <div class="job-meta"><span>Data Science</span><div class="job-dot"></div><span>Hyderabad</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Fresher OK</span><span class="tag tag-gray">M.Tech/MS preferred</span><span class="tag tag-gold">Campus Drive</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹14–20 LPA</strong><span>incl. ESOPs</span><div class="job-deadline">Closes Aug 10</div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetail('aiml')">
+        <div>
+          <div class="job-title">AI / ML Engineer – Platform Team</div>
+          <div class="job-meta"><span>Artificial Intelligence</span><div class="job-dot"></div><span>Bengaluru / Remote</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Fresher OK</span><span class="tag tag-gray">0–2 yrs</span><span class="tag tag-gold">Hot Role 🔥</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹16–24 LPA</strong><span>+ RSUs</span><div class="job-deadline">Closes Aug 12</div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetail('fe')">
+        <div>
+          <div class="job-title">Frontend Developer – React / Next.js</div>
+          <div class="job-meta"><span>Engineering</span><div class="job-dot"></div><span>Bengaluru / Remote</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Fresher OK</span><span class="tag tag-gray">Portfolio Required</span><span class="tag tag-gold">Campus Drive</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹10–16 LPA</strong><span>+ signing bonus</span><div class="job-deadline">Closes Aug 18</div></div>
+      </div>
+
+      <div class="job-card" onclick="openJobDetail('wd')">
+        <div>
+          <div class="job-title">Full Stack Web Developer</div>
+          <div class="job-meta"><span>Engineering</span><div class="job-dot"></div><span>Pune / Remote</span><div class="job-dot"></div><span>Full-time</span></div>
+          <div class="job-tags"><span class="tag tag-blue">Fresher OK</span><span class="tag tag-gray">0–2 yrs</span><span class="tag tag-gold">Campus Drive</span></div>
+        </div>
+        <div class="job-ctc"><strong>₹9–14 LPA</strong><span>incl. ESOPs</span><div class="job-deadline">Closes Aug 25</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: JOB DETAIL + APPLY
+══════════════════════════════════════════════ -->
+<div id="page-apply" class="page hidden">
+  <div class="app-layout">
+    <div class="app-sidebar">
+      <h3>APPLICATION STEPS</h3>
+      <div class="step-list" id="apply-step-list"></div>
+      <div style="margin-top:2rem;padding:1rem;background:var(--surface);border-radius:4px;border:1px solid var(--border)">
+        <div style="font-size:.7rem;font-weight:700;color:var(--muted);margin-bottom:.5rem;font-family:var(--mono)">ROLE APPLIED FOR</div>
+        <div style="font-weight:700;font-size:.85rem" id="sidebar-role">SDE – I</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:.25rem" id="sidebar-ctc">₹18–22 LPA</div>
+        <div style="margin-top:.75rem"><span class="tag tag-gold">Campus Drive 2025</span></div>
+      </div>
+    </div>
+    <div class="app-main" id="apply-main"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: CANDIDATE DASHBOARD
+══════════════════════════════════════════════ -->
+<div id="page-dashboard" class="page hidden">
+  <div class="candidate-dashboard">
+    <div class="dash-header">
+      <div>
+        <div class="dash-greeting" id="dash-greeting">Good morning! 👋</div>
+        <div class="dash-sub">Application ID: <span style="font-family:var(--mono);color:var(--accent)" id="dash-appid">NC-2025-XXXXX</span></div>
+      </div>
+      <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+        <button class="btn btn-outline btn-sm" onclick="goTo('inbox')">📬 Inbox</button>
+        <button class="btn btn-primary btn-sm" id="dash-action-btn">Continue →</button>
+      </div>
+    </div>
+    <div class="dash-grid">
+      <div>
+        <div class="timeline-card">
+          <div class="timeline-title">
+            Recruitment Timeline
+            <span class="tag tag-blue" id="dash-stage-tag">Applied</span>
+          </div>
+          <div class="timeline" id="recruitment-timeline"></div>
+        </div>
+      </div>
+      <div>
+        <div class="status-card" id="score-card" style="display:none">
+          <div class="status-header">
+            <span class="status-title">Round Scores</span>
+            <span class="app-id" id="score-appid"></span>
+          </div>
+          <div id="score-rows"></div>
+        </div>
+        <div class="status-card">
+          <div class="status-header">
+            <span class="status-title">📬 Latest Email</span>
+          </div>
+          <div class="email-preview" id="latest-email-preview">
+            <div class="email-from">No emails yet</div>
+          </div>
+        </div>
+        <div class="status-card" style="margin-top:1rem">
+          <div class="status-header"><span class="status-title">Quick Actions</span></div>
+          <div style="display:flex;flex-direction:column;gap:.5rem" id="quick-actions"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: INBOX
+══════════════════════════════════════════════ -->
+<div id="page-inbox" class="page hidden">
+  <div class="inbox-layout">
+    <div class="inbox-list">
+      <div class="inbox-header">
+        Inbox
+        <span class="tag tag-blue" id="unread-count-tag">0 unread</span>
+      </div>
+      <div id="inbox-list-items"></div>
+    </div>
+    <div class="email-view" id="email-view-pane">
+      <div style="text-align:center;padding:4rem;color:var(--muted)">
+        <div style="font-size:3rem;margin-bottom:1rem">📬</div>
+        <div style="font-weight:600">Select an email to read</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: MCQ TEST
+══════════════════════════════════════════════ -->
+<div id="page-mcq" class="page hidden" style="display:flex;flex-direction:column;padding:0">
+  <div class="test-nav">
+    <div class="test-nav-title">NexaCore · MCQ Assessment · <span id="mcq-sec-lbl" style="color:#60a5fa">Section A</span></div>
+    <div style="display:flex;align-items:center;gap:1rem">
+      <div class="test-timer" id="mcq-timer">90:00</div>
+      <button onclick="submitMCQ()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:5px 14px;border-radius:3px;cursor:pointer;font-size:.75rem;font-family:var(--font);font-weight:600">Submit</button>
+    </div>
+  </div>
+  <div class="test-body" style="flex:1;overflow:hidden">
+    <div class="test-sidebar">
+      <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:2px;color:var(--muted);margin-bottom:.5rem">SECTION A · NEG MARKING</div>
+      <div class="qdots" id="qda"></div>
+      <div style="font-family:var(--mono);font-size:.6rem;letter-spacing:2px;color:var(--muted);margin:.75rem 0 .5rem">SECTION B · NO NEG</div>
+      <div class="qdots" id="qdb"></div>
+      <div style="margin-top:1rem;font-size:.7rem;color:var(--muted);line-height:1.8">
+        <div>⬛ Answered</div><div>🟡 Flagged</div><div>⬜ Not visited</div>
+      </div>
+    </div>
+    <div class="qmain" id="qmain"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: CODING
+══════════════════════════════════════════════ -->
+<div id="page-coding" class="page hidden" style="display:flex;flex-direction:column;padding:0">
+  <div class="test-nav">
+    <div class="test-nav-title">NexaCore · Coding Round · <span id="code-prob-lbl" style="color:#60a5fa">Problem 1/3</span></div>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <div class="test-timer" id="code-timer">60:00</div>
+      <button onclick="prevProb()" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:5px 12px;border-radius:3px;cursor:pointer;font-size:.75rem;font-family:var(--font)">← Prev</button>
+      <button onclick="nextProb()" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#fff;padding:5px 12px;border-radius:3px;cursor:pointer;font-size:.75rem;font-family:var(--font)">Next →</button>
+      <button onclick="runCode()" style="background:#16a34a;border:none;color:#fff;padding:6px 16px;border-radius:3px;cursor:pointer;font-size:.78rem;font-family:var(--font);font-weight:700">▶ Run</button>
+      <button onclick="submitCoding()" style="background:var(--accent);border:none;color:#fff;padding:6px 16px;border-radius:3px;cursor:pointer;font-size:.78rem;font-family:var(--font);font-weight:700">Submit All →</button>
+    </div>
+  </div>
+  <div class="code-layout" style="flex:1;overflow:hidden">
+    <div class="prob-panel">
+      <div class="prob-inner">
+        <div style="display:flex;gap:.4rem;margin-bottom:.75rem" id="prob-tags-div"></div>
+        <div class="prob-h" id="prob-title-div"></div>
+        <div class="prob-desc" id="prob-desc-div"></div>
+      </div>
+      <div style="padding:0 1.5rem 1.5rem" id="testcases-div"></div>
+    </div>
+    <div class="editor-wrap">
+      <div class="editor-top">
+        <select class="lang-sel" id="lang-sel" onchange="changeLang()">
+          <option value="python">Python 3</option>
+          <option value="javascript">JavaScript</option>
+          <option value="cpp">C++</option>
+          <option value="java">Java</option>
+        </select>
+        <button onclick="resetEditor()" style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#aaa;padding:4px 10px;border-radius:3px;cursor:pointer;font-size:.72rem;font-family:var(--mono)">Reset</button>
+        <span style="margin-left:auto;font-size:.68rem;color:#555;font-family:var(--mono)">Ctrl+Enter = Run</span>
+      </div>
+      <div class="codebox" style="flex:1;min-height:0">
+        <textarea class="code-ta" id="code-ta" spellcheck="false" onkeydown="editorKey(event)" oninput="updateLines()"></textarea>
+      </div>
+      <div class="output-box" id="output-box">
+        <div class="ol i">// Output appears here after running</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: HR INTERVIEW
+══════════════════════════════════════════════ -->
+<div id="page-hr" class="page hidden" style="display:flex;flex-direction:column;padding:0">
+  <div class="test-nav">
+    <div class="test-nav-title">NexaCore · HR Interview · Maya (AI Interviewer)</div>
+    <div style="display:flex;align-items:center;gap:1rem">
+      <div class="test-timer" id="hr-timer">30:00</div>
+      <span style="font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.4)" id="hr-q-counter">Q1 / 9</span>
+    </div>
+  </div>
+  <div class="hr-wrap" style="flex:1;overflow:hidden">
+    <div class="hr-left">
+      <div class="vid-wrap" id="vid-wrap">
+        <video id="hr-video" autoplay muted playsinline></video>
+        <canvas id="hr-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none"></canvas>
+        <div class="live-badge"><div class="live-dot"></div>LIVE ANALYSIS</div>
+      </div>
+      <div class="mood-panel">
+        <div class="mood-lbl">REAL-TIME MOOD ANALYSIS</div>
+        <div class="mrow"><span class="mlabel">Confident</span><div class="mtrack"><div class="mfill" id="mf-confident" style="width:0%;background:#16a34a"></div></div><span class="mval" id="mv-confident">0%</span></div>
+        <div class="mrow"><span class="mlabel">Nervous</span><div class="mtrack"><div class="mfill" id="mf-nervous" style="width:0%;background:#f59e0b"></div></div><span class="mval" id="mv-nervous">0%</span></div>
+        <div class="mrow"><span class="mlabel">Happy</span><div class="mtrack"><div class="mfill" id="mf-happy" style="width:0%;background:#8b5cf6"></div></div><span class="mval" id="mv-happy">0%</span></div>
+        <div class="mrow"><span class="mlabel">Focused</span><div class="mtrack"><div class="mfill" id="mf-focused" style="width:0%;background:#1a1aff"></div></div><span class="mval" id="mv-focused">0%</span></div>
+        <div class="mrow"><span class="mlabel">Stressed</span><div class="mtrack"><div class="mfill" id="mf-stressed" style="width:0%;background:#c0392b"></div></div><span class="mval" id="mv-stressed">0%</span></div>
+        <div class="dom-mood"><div class="dom-mood-lbl">DOMINANT MOOD</div><div class="dom-mood-val" id="dom-mood">—</div></div>
+      </div>
+      <div class="mood-log" id="mood-log"><div class="mlog">> Analysis engine <span>initialized</span></div></div>
+    </div>
+    <div class="hr-right">
+      <div class="hr-chat-head">
+        <div class="hr-av">🤖</div>
+        <div><strong style="font-family:var(--font);font-size:.9rem;font-weight:700">Maya — Senior HR, NexaCore</strong><br/><span style="font-size:.72rem;color:var(--muted)">AI Behavioral Interviewer · Mood-Aware</span></div>
+        <div style="margin-left:auto"><span class="tag tag-green">● Active</span></div>
+      </div>
+      <div class="chat-msgs" id="chat-msgs"></div>
+      <div class="chat-in-area">
+        <textarea class="chat-ta" id="chat-ta" rows="1" placeholder="Type your answer... (Enter to send)" onkeydown="hrKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" id="send-btn" onclick="sendHR()">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: FINAL DECISION
+══════════════════════════════════════════════ -->
+<div id="page-decision" class="page hidden">
+  <div class="decision-page fade-in">
+    <span class="decision-emoji" id="dec-emoji">🎉</span>
+    <div class="decision-title" id="dec-title">Congratulations!</div>
+    <p id="dec-sub" style="color:var(--muted);margin-bottom:1.5rem;line-height:1.7"></p>
+    <div class="offer-card" id="offer-card" style="display:none">
+      <div style="font-weight:800;color:var(--success);margin-bottom:1.25rem;font-size:1rem">📋 Official Offer Letter — NexaCore Technologies</div>
+      <div class="offer-row"><span style="color:var(--muted)">Candidate</span><strong id="offer-name">—</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Role</span><strong>Software Development Engineer – I</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">CTC</span><strong style="color:var(--accent)">₹18,00,000 per annum</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Location</span><strong>Bengaluru, Karnataka (Hybrid – 3 days/week)</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Joining Date</span><strong>1st August 2025</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Stock Options</span><strong>4,000 RSUs vesting over 4 years</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Bond Period</span><strong>None</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Offer Valid Till</span><strong style="color:var(--danger)">July 20, 2025 (72 hrs)</strong></div>
+    </div>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1rem" id="dec-actions"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE: ONBOARDING
+══════════════════════════════════════════════ -->
+<div id="page-onboarding" class="page hidden">
+  <div class="onboard-hero">
+    <div style="font-size:2.5rem;margin-bottom:.5rem">🎊</div>
+    <h1>Welcome to NexaCore!</h1>
+    <p>Complete your onboarding checklist before your joining date: <strong>August 1, 2025</strong></p>
+  </div>
+  <div class="onboard-body">
+    <div class="onboard-progress" id="onboard-progress"></div>
+    <div class="onboard-cards" id="onboard-cards"></div>
+  </div>
+</div>
+
+<script>
+const ROLE_CONFIG = {
+  sde1:  { title:'Software Development Engineer – I', ctc:'₹18–22 LPA', dept:'Engineering', skills:'DSA, System Design, OOP', mcqFocus:'DSA, OS, DBMS, Networking', codingLang:'Python / JavaScript / C++ / Java', hrFocus:'problem solving, ownership, collaboration' },
+  ds:    { title:'Data Scientist – ML Platform', ctc:'₹16–20 LPA', dept:'Data Science', skills:'ML, Statistics, Python, SQL', mcqFocus:'Statistics, ML algorithms, Python, SQL', codingLang:'Python', hrFocus:'research mindset, analytical thinking, experimentation' },
+  pm:    { title:'Associate Product Manager', ctc:'₹14–18 LPA', dept:'Product', skills:'Product thinking, Analytics, Communication', mcqFocus:'Aptitude, Verbal, Business cases', codingLang:'Python (basic)', hrFocus:'user empathy, decision making, leadership' },
+  devops:{ title:'DevOps Engineer – Cloud Infrastructure', ctc:'₹15–19 LPA', dept:'Engineering', skills:'Docker, Kubernetes, CI/CD, AWS', mcqFocus:'OS, Networking, Linux, Cloud', codingLang:'Python / Bash', hrFocus:'reliability mindset, automation, incident handling' },
+  ux:    { title:'UX Designer – Consumer Products', ctc:'₹12–16 LPA', dept:'Design', skills:'Figma, User Research, Prototyping', mcqFocus:'Aptitude, Verbal, Design thinking', codingLang:'N/A (Portfolio review)', hrFocus:'empathy, creativity, feedback handling' },
+  sre:   { title:'Site Reliability Engineer', ctc:'₹17–21 LPA', dept:'Engineering', skills:'SRE, Monitoring, Incident Response', mcqFocus:'OS, Networking, DSA, Systems', codingLang:'Python / Go', hrFocus:'ownership, on-call readiness, communication' },
+  da:    { title:'Data Analyst – Business Intelligence', ctc:'₹8–12 LPA', dept:'Data & Analytics', skills:'SQL, Excel, Tableau/Power BI, Python basics, Statistics', mcqFocus:'SQL, Statistics, Aptitude, Reasoning, Excel formulas', codingLang:'Python / SQL', hrFocus:'attention to detail, storytelling with data, stakeholder communication' },
+  dsc:   { title:'Data Scientist – AI Research', ctc:'₹14–20 LPA', dept:'Data Science', skills:'Python, ML/DL, Statistics, TensorFlow/PyTorch, SQL', mcqFocus:'ML algorithms, Statistics, Linear Algebra, Python, DSA', codingLang:'Python', hrFocus:'research curiosity, hypothesis thinking, presenting insights' },
+  aiml:  { title:'AI / ML Engineer – Platform Team', ctc:'₹16–24 LPA', dept:'Artificial Intelligence', skills:'PyTorch, TensorFlow, MLOps, Python, Transformers, LLMs', mcqFocus:'ML/DL concepts, Python, DSA, System Design for ML', codingLang:'Python', hrFocus:'passion for AI, research-to-production mindset, collaboration' },
+  fe:    { title:'Frontend Developer – React / Next.js', ctc:'₹10–16 LPA', dept:'Engineering', skills:'React, Next.js, TypeScript, CSS, HTML, REST APIs', mcqFocus:'JavaScript, DSA basics, OOP, CSS/HTML, Networking', codingLang:'JavaScript / TypeScript', hrFocus:'pixel-perfect mindset, user empathy, speed of delivery' },
+  wd:    { title:'Full Stack Web Developer', ctc:'₹9–14 LPA', dept:'Engineering', skills:'React, Node.js, Express, MongoDB/PostgreSQL, REST APIs', mcqFocus:'DSA basics, OS, DBMS, JavaScript, Networking', codingLang:'JavaScript / Python', hrFocus:'end-to-end ownership, versatility, learning agility' },
+};
+
+const ROLE_MCQ_TAGS = {
+  da:   { focus: 'SQL, Statistics, Analytics', custom: ['What does GROUP BY in SQL do?', 'Which chart type is best for trend over time?'] },
+  dsc:  { focus: 'ML, Statistics, Python', custom: ['What is the bias-variance tradeoff?', 'Define precision vs recall.'] },
+  aiml: { focus: 'ML/DL, Python, LLMs', custom: ['What is backpropagation?', 'Difference between CNN and RNN?'] },
+  fe:   { focus: 'JavaScript, React, CSS', custom: ['What is the virtual DOM?', 'Explain CSS specificity.'] },
+  wd:   { focus: 'Full Stack, DBMS, APIs', custom: ['Explain REST vs GraphQL.', 'What is middleware in Express.js?'] },
+};
+const S = {
+  user: null,
+  appliedRole: null,
+  appId: null,
+  applyStep: 0,
+  applyData: {},
+  stage: 'applied', // applied → screening → mcq → coding → hr → decision → onboarding
+  emails: [],
+  notifications: [],
+  unreadNotifs: 0,
+  scores: { mcq: 0, mcqA: 0, mcqB: 0, coding: 0, hr: 0 },
+  mcq: { answers: new Array(100).fill(null), flagged: new Set(), current: 0, remaining: 5400, interval: null },
+  coding: { current: 0, code: ['','',''], results: [null,null,null], remaining: 3600, interval: null },
+  hr: { qIdx: 0, msgs: [], remaining: 1800, interval: null, moodHistory: [], moodInterval: null, camStream: null },
+  onboard: {},
+};
+
+// ══════════════════════════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════════════════════════
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+  const el = document.getElementById('page-'+page);
+  if(el){ el.classList.remove('hidden'); }
+  window.scrollTo(0,0);
+  // sync nav
+  document.querySelectorAll('.nav-link').forEach(l=>l.classList.remove('active'));
+}
+
+// ══════════════════════════════════════════════════════════════
+// TOASTS
+// ══════════════════════════════════════════════════════════════
+function showToast(icon, title, sub, duration=4000) {
+  const tc = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.innerHTML = `<div class="toast-icon">${icon}</div><div class="toast-text"><div class="toast-title">${title}</div><div class="toast-sub">${sub}</div></div><button class="toast-close" onclick="this.parentElement.remove()">✕</button>`;
+  tc.appendChild(t);
+  if(duration>0) setTimeout(()=>{ t.classList.add('hide'); setTimeout(()=>t.remove(),300); }, duration);
+}
+
+// ══════════════════════════════════════════════════════════════
+// NOTIFICATIONS
+// ══════════════════════════════════════════════════════════════
+function addNotif(icon, text, sub) {
+  S.notifications.unshift({ icon, text, sub, time: 'Just now', unread: true });
+  S.unreadNotifs++;
+  const badge = document.getElementById('notif-badge');
+  badge.textContent = S.unreadNotifs;
+  badge.style.display = 'flex';
+  renderNotifPanel();
+}
+function toggleNotifPanel() {
+  const p = document.getElementById('notif-panel');
+  p.classList.toggle('hidden');
+}
+function clearNotifs() {
+  S.notifications.forEach(n=>n.unread=false);
+  S.unreadNotifs = 0;
+  document.getElementById('notif-badge').textContent = '0';
+  renderNotifPanel();
+}
+function renderNotifPanel() {
+  const list = document.getElementById('notif-list');
+  if(!list) return;
+  list.innerHTML = S.notifications.slice(0,8).map(n=>`
+    <div class="notif-item ${n.unread?'unread':''}">
+      <div class="notif-icon">${n.icon}</div>
+      <div><div class="notif-text">${n.text}</div><div class="notif-time">${n.sub} · ${n.time}</div></div>
+    </div>
+  `).join('') || '<div style="padding:1.5rem;text-align:center;color:var(--muted);font-size:.82rem">No notifications</div>';
+}
+
+// ══════════════════════════════════════════════════════════════
+// EMAIL SYSTEM
+// ══════════════════════════════════════════════════════════════
+const EMAILS = {
+  application_received: (name) => ({
+    from: 'careers@nexacore.io',
+    fromName: 'NexaCore Talent Team',
+    subject: `Application Received – SDE-I · NC-${S.appId}`,
+    time: 'Just now',
+    preview: 'Thank you for applying to NexaCore Technologies...',
+    body: `<p>Dear ${name},</p>
+    <p>Thank you for applying to <strong>NexaCore Technologies</strong> for the position of <strong>Software Development Engineer – I</strong>.</p>
+    <div class="highlight-box">📋 <strong>Application ID:</strong> NC-${S.appId}<br/>📍 <strong>Role:</strong> Software Development Engineer – I<br/>📅 <strong>Applied On:</strong> ${new Date().toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'})}</div>
+    <p>Our talent team is reviewing your application. We typically take <strong>2–3 business days</strong> to process applications during campus drives. You will receive an email with next steps shortly.</p>
+    <p>In the meantime, feel free to explore more about our engineering culture at <strong>nexacore.io/culture</strong>.</p>
+    <p>Best regards,</p>
+    <div class="email-signature">Priya Sharma · Talent Acquisition Lead<br/>NexaCore Technologies · careers@nexacore.io<br/>📞 +91 80 4567 8900</div>`
+  }),
+  shortlisted: (name) => ({
+    from: 'campus@nexacore.io',
+    fromName: 'NexaCore Campus Recruitment',
+    subject: `🎯 Shortlisted! Online Assessment Scheduled – NC-${S.appId}`,
+    time: '2 days later',
+    preview: 'Congratulations! You have been shortlisted...',
+    body: `<p>Dear ${name},</p>
+    <p>🎉 <strong>Congratulations!</strong> After reviewing your application, we are pleased to inform you that you have been shortlisted for the next round of our recruitment process.</p>
+    <div class="highlight-box">🗓️ <strong>Round 1: Online MCQ Assessment</strong><br/>📅 <strong>Date:</strong> ${getDateOffset(3)}<br/>⏱️ <strong>Duration:</strong> 90 minutes (100 questions)<br/>📍 <strong>Format:</strong> Online – on this portal<br/>🔒 <strong>Instructions:</strong> Stable internet required. No backtracking in Section A.</div>
+    <p>The test consists of two sections:</p>
+    <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:2">
+      <li><strong>Section A (Q1–40):</strong> Aptitude, Verbal, Reasoning — +3/−1 marking</li>
+      <li><strong>Section B (Q41–100):</strong> DSA, OS, DBMS, Networks — +2/0 marking</li>
+    </ul>
+    <div class="cta-box"><strong>Click "Continue" on your dashboard to begin the assessment</strong><br/><span style="opacity:.7;font-size:.8rem">Results will be declared within 24 hours</span></div>
+    <p>Best of luck! We look forward to seeing your performance.</p>
+    <div class="email-signature">Rohan Mehta · Campus Recruitment Manager<br/>NexaCore Technologies · campus@nexacore.io</div>`
+  }),
+  mcq_result: (name, score, pass) => ({
+    from: 'campus@nexacore.io',
+    fromName: 'NexaCore Assessment Team',
+    subject: pass ? `✅ MCQ Cleared! Coding Round Next – NC-${S.appId}` : `❌ MCQ Result – NC-${S.appId}`,
+    time: '1 day later',
+    preview: pass ? 'Congratulations! You have cleared the MCQ assessment...' : 'Thank you for attempting the assessment...',
+    body: pass ? `<p>Dear ${name},</p>
+    <p>🎊 <strong>Congratulations!</strong> You have successfully cleared Round 1 of the NexaCore Campus Recruitment process!</p>
+    <div class="highlight-box">📊 <strong>Your MCQ Score:</strong> ${score}/300<br/>✅ <strong>Status:</strong> CLEARED<br/>🎯 <strong>Percentile:</strong> Top 18%</div>
+    <p>You have been shortlisted for <strong>Round 2: Coding Assessment</strong>.</p>
+    <div class="cta-box"><strong>Coding Round is now unlocked on your dashboard</strong><br/><span style="opacity:.7;font-size:.8rem">Duration: 60 minutes · 3 Problems</span></div>
+    <div class="email-signature">NexaCore Assessment Team · campus@nexacore.io</div>` :
+    `<p>Dear ${name},</p><p>Thank you for attempting Round 1. Unfortunately, your score did not meet the cutoff for this cycle. We encourage you to apply again in 6 months.</p><div class="email-signature">NexaCore Talent Team</div>`
+  }),
+  coding_result: (name, pass) => ({
+    from: 'campus@nexacore.io',
+    fromName: 'NexaCore Engineering Team',
+    subject: pass ? `🚀 Coding Round Cleared! HR Interview Next` : `Coding Round Result – NC-${S.appId}`,
+    time: '6 hours later',
+    preview: pass ? 'Excellent work! You have cleared the coding assessment...' : 'Thank you for participating...',
+    body: pass ? `<p>Dear ${name},</p>
+    <p>🚀 <strong>Excellent work!</strong> You have cleared Round 2 of the NexaCore recruitment process.</p>
+    <div class="highlight-box">💻 <strong>Coding Assessment:</strong> Completed<br/>✅ <strong>Status:</strong> CLEARED<br/>🎯 <strong>Problems Solved:</strong> ${S.scores.coding >= 67 ? '3/3' : S.scores.coding >= 34 ? '2/3' : '1/3'}</div>
+    <p>You are now invited for <strong>Round 3: HR Interview with Maya</strong> (AI-powered behavioral assessment with mood analysis).</p>
+    <div class="cta-box"><strong>HR Interview is now available on your dashboard</strong><br/><span style="opacity:.7;font-size:.8rem">Duration: ~30 minutes · 9 behavioral questions</span></div>
+    <div class="email-signature">NexaCore Engineering Recruitment · campus@nexacore.io</div>` :
+    `<p>Dear ${name},</p><p>Thank you for participating in our coding round. Unfortunately you did not clear this round. We wish you the best in your future endeavors.</p><div class="email-signature">NexaCore Engineering Team</div>`
+  }),
+  hr_result: (name, pass) => ({
+    from: 'hr@nexacore.io',
+    fromName: 'NexaCore Human Resources',
+    subject: pass ? `🎉 SELECTED! Offer Letter – NC-${S.appId}` : `HR Round Result – NC-${S.appId}`,
+    time: '24 hours later',
+    preview: pass ? 'We are delighted to extend an offer of employment...' : 'Thank you for your participation...',
+    body: pass ? `<p>Dear ${name},</p>
+    <p>🎉 We are absolutely <strong>delighted</strong> to inform you that you have been selected for the position of <strong>Software Development Engineer – I</strong> at NexaCore Technologies!</p>
+    <div class="highlight-box">🏢 <strong>Role:</strong> Software Development Engineer – I<br/>💰 <strong>CTC:</strong> ₹18,00,000 per annum<br/>📍 <strong>Location:</strong> Bengaluru, Karnataka (Hybrid)<br/>📅 <strong>Joining Date:</strong> August 1, 2025<br/>📈 <strong>Stock:</strong> 4,000 RSUs (4-year vest)</div>
+    <p>Your formal offer letter has been generated. Please review and accept it on your dashboard within <strong>72 hours</strong>.</p>
+    <div class="cta-box"><strong>Go to Dashboard → View & Accept Offer Letter</strong></div>
+    <p>Next, you'll be directed to complete your onboarding checklist. Welcome to the NexaCore family! 🎊</p>
+    <div class="email-signature">Priya Sharma · Talent Acquisition Lead<br/>NexaCore Technologies · hr@nexacore.io<br/>📞 +91 80 4567 8900</div>` :
+    `<p>Dear ${name},</p><p>Thank you for completing all rounds of our recruitment process. After careful consideration, we are unable to extend an offer at this time. We appreciate your effort and wish you success.</p><div class="email-signature">NexaCore HR Team</div>`
+  }),
+  onboard_welcome: (name) => ({
+    from: 'onboarding@nexacore.io',
+    fromName: 'NexaCore Onboarding Team',
+    subject: `👋 Welcome aboard! Your onboarding checklist is ready`,
+    time: '1 hour later',
+    preview: 'Welcome to NexaCore! Complete your onboarding to get started...',
+    body: `<p>Dear ${name},</p>
+    <p>Welcome to the <strong>NexaCore family!</strong> 🎊 We're thrilled to have you join our engineering team.</p>
+    <div class="highlight-box">📅 <strong>Joining Date:</strong> August 1, 2025<br/>🏢 <strong>Location:</strong> NexaCore HQ, Bengaluru<br/>👥 <strong>Team:</strong> Platform Engineering<br/>👤 <strong>Your Manager:</strong> Aditya Kumar (aditya.k@nexacore.io)</div>
+    <p>Your onboarding portal is now live. Please complete the following before Day 1:</p>
+    <ul style="margin:.75rem 0 .75rem 1.5rem;line-height:2.2">
+      <li>Document verification and KYC</li>
+      <li>Laptop preference selection</li>
+      <li>Background verification consent</li>
+      <li>Benefits enrollment (health, dental, life)</li>
+      <li>Policies acknowledgment</li>
+      <li>IT setup and credentials</li>
+    </ul>
+    <div class="cta-box"><strong>Complete your onboarding on the portal</strong></div>
+    <div class="email-signature">Ananya Iyer · Onboarding Specialist<br/>NexaCore Technologies · onboarding@nexacore.io</div>`
+  })
+};
+
+function addEmail(key, ...args) {
+  const email = EMAILS[key](...args);
+  email.id = key + '_' + Date.now();
+  email.unread = true;
+  S.emails.unshift(email);
+  addNotif('📬', 'New Email', email.subject.substring(0,50));
+  updateLatestEmailPreview();
+  renderInbox();
+}
+
+function updateLatestEmailPreview() {
+  const el = document.getElementById('latest-email-preview');
+  if(!el || !S.emails.length) return;
+  const e = S.emails[0];
+  el.innerHTML = `<div class="email-from">From: ${e.fromName} · ${e.time}</div>
+  <div class="email-subject">${e.subject}</div>
+  <div class="email-body" style="font-size:.78rem;color:var(--muted)">${e.preview}</div>
+  <button class="btn btn-ghost btn-sm" style="margin-top:.75rem" onclick="goTo('inbox')">Open Inbox →</button>`;
+}
+
+function getDateOffset(days) {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toLocaleDateString('en-IN', {weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+
+// ══════════════════════════════════════════════════════════════
+// JOB DETAIL + APPLICATION
+// ══════════════════════════════════════════════════════════════
+const APPLY_STEPS = [
+  { id:'personal', label:'Personal Info' },
+  { id:'education', label:'Education' },
+  { id:'skills', label:'Skills & Projects' },
+  { id:'resume', label:'Resume Upload' },
+  { id:'review', label:'Review & Submit' },
+];
+
+function openJobDetail(role) {
+  S.appliedRole = role;
+  S.applyStep = 0;
+  S.applyData = {};
+  const cfg = ROLE_CONFIG[role] || ROLE_CONFIG.sde1;
+  document.getElementById('sidebar-role').textContent = cfg.title;
+  document.getElementById('sidebar-ctc').textContent = cfg.ctc;
+  goTo('apply');
+  renderApplySidebar();
+  renderApplyStep(0);
+}
+
+function renderApplySidebar() {
+  const list = document.getElementById('apply-step-list');
+  list.innerHTML = APPLY_STEPS.map((s,i)=>`
+    <div class="step-item ${i===S.applyStep?'active':i<S.applyStep?'done':'locked'}">
+      <div class="step-num ${i<S.applyStep?'done-bg':''}">${i<S.applyStep?'✓':i+1}</div>
+      ${s.label}
+    </div>
+  `).join('');
+}
+
+function renderApplyStep(step) {
+  S.applyStep = step;
+  renderApplySidebar();
+  const main = document.getElementById('apply-main');
+  const progress = `<div class="progress-steps">${APPLY_STEPS.map((s,i)=>`
+    <div class="pstep ${i===step?'active':i<step?'done':''}">
+      <div class="pstep-dot">${i<step?'✓':i+1}</div>
+      <div>${s.label}</div>
+    </div>
+  `).join('')}</div>`;
+
+  const forms = [
+    // Step 0: Personal Info
+    `${progress}
+    <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.25rem">Personal Information</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">Tell us the basics. All fields marked * are required.</p>
+    <div class="form-section">
+      <div class="form-section-title">BASIC DETAILS</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">First Name <span class="req">*</span></label><input class="form-input" id="f-fname" placeholder="Arjun" value="${S.applyData.fname||''}"/></div>
+        <div class="form-group"><label class="form-label">Last Name <span class="req">*</span></label><input class="form-input" id="f-lname" placeholder="Sharma" value="${S.applyData.lname||''}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Email Address <span class="req">*</span></label><input class="form-input" type="email" id="f-email" placeholder="arjun@college.edu" value="${S.applyData.email||''}"/></div>
+        <div class="form-group"><label class="form-label">Phone Number <span class="req">*</span></label><input class="form-input" type="tel" id="f-phone" placeholder="+91 98765 43210" value="${S.applyData.phone||''}"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Date of Birth</label><input class="form-input" type="date" id="f-dob" value="${S.applyData.dob||''}"/></div>
+        <div class="form-group"><label class="form-label">Gender</label><select class="form-select" id="f-gender"><option value="">Select</option><option ${S.applyData.gender==='male'?'selected':''}>Male</option><option ${S.applyData.gender==='female'?'selected':''}>Female</option><option>Prefer not to say</option></select></div>
+      </div>
+      <div class="form-group"><label class="form-label">LinkedIn Profile</label><input class="form-input" id="f-linkedin" placeholder="linkedin.com/in/arjunsharma" value="${S.applyData.linkedin||''}"/></div>
+      <div class="form-group"><label class="form-label">GitHub / Portfolio</label><input class="form-input" id="f-github" placeholder="github.com/arjunsharma" value="${S.applyData.github||''}"/></div>
+      <div class="form-group"><label class="form-label">Are you currently employed?</label><select class="form-select" id="f-employed"><option value="no" ${S.applyData.employed==='no'?'selected':''}>No – Fresher</option><option value="yes">Yes – Experienced</option></select></div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-title">ADDRESS</div>
+      <div class="form-group"><label class="form-label">City <span class="req">*</span></label><input class="form-input" id="f-city" placeholder="Bengaluru" value="${S.applyData.city||''}"/></div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">State</label><input class="form-input" id="f-state" placeholder="Karnataka" value="${S.applyData.state||''}"/></div>
+        <div class="form-group"><label class="form-label">PIN Code</label><input class="form-input" id="f-pin" placeholder="560001" value="${S.applyData.pin||''}"/></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:flex-end">
+      <button class="btn btn-primary" onclick="saveStep0()">Next: Education →</button>
+    </div>`,
+
+    // Step 1: Education
+    `${progress}
+    <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.25rem">Education Details</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">Your academic background.</p>
+    <div class="form-section">
+      <div class="form-section-title">UNDERGRADUATE / B.TECH / B.E.</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">College / University <span class="req">*</span></label><input class="form-input" id="f-college" placeholder="IIT Bengaluru" value="${S.applyData.college||''}"/></div>
+        <div class="form-group"><label class="form-label">Degree <span class="req">*</span></label><select class="form-select" id="f-degree"><option>B.Tech</option><option>B.E.</option><option>B.Sc</option><option>M.Tech</option><option>MCA</option><option>BCA</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Branch / Specialization <span class="req">*</span></label><input class="form-input" id="f-branch" placeholder="Computer Science & Engineering" value="${S.applyData.branch||''}"/></div>
+        <div class="form-group"><label class="form-label">Graduation Year <span class="req">*</span></label><select class="form-select" id="f-gradyear"><option>2025</option><option>2024</option><option>2026</option><option>2023</option></select></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">CGPA / Percentage <span class="req">*</span></label><input class="form-input" id="f-cgpa" placeholder="8.5 / 10 or 85%" value="${S.applyData.cgpa||''}"/></div>
+        <div class="form-group"><label class="form-label">Backlogs (active)</label><select class="form-select" id="f-backlogs"><option value="0">None (0)</option><option value="1">1</option><option value="2">2</option><option value="3+">3 or more</option></select></div>
+      </div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-title">CLASS XII (12th)</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Board</label><input class="form-input" id="f-board12" placeholder="CBSE / State Board" value="${S.applyData.board12||''}"/></div>
+        <div class="form-group"><label class="form-label">Percentage / Grade</label><input class="form-input" id="f-pct12" placeholder="92.4%" value="${S.applyData.pct12||''}"/></div>
+      </div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-title">CLASS X (10th)</div>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Board</label><input class="form-input" id="f-board10" placeholder="CBSE" value="${S.applyData.board10||''}"/></div>
+        <div class="form-group"><label class="form-label">Percentage / CGPA</label><input class="form-input" id="f-pct10" placeholder="94.2%" value="${S.applyData.pct10||''}"/></div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between">
+      <button class="btn btn-ghost" onclick="renderApplyStep(0)">← Back</button>
+      <button class="btn btn-primary" onclick="saveStep1()">Next: Skills & Projects →</button>
+    </div>`,
+
+    // Step 2: Skills
+    `${progress}
+    <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.25rem">Skills & Projects</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">Showcase your technical expertise.</p>
+    <div class="form-section">
+      <div class="form-section-title">TECHNICAL SKILLS</div>
+      <div class="form-group">
+        <label class="form-label">Programming Languages <span class="req">*</span></label>
+        <div class="skills-input-wrap" id="skills-lang-wrap" onclick="document.getElementById('skill-lang-input').focus()">
+          ${(S.applyData.skillsLang||[]).map(s=>`<div class="skill-tag">${s}<button onclick="removeSkill('lang','${s}')">×</button></div>`).join('')}
+          <input id="skill-lang-input" class="skill-input-field" placeholder="Type and press Enter (e.g. Python)" onkeydown="addSkill(event,'lang')"/>
+        </div>
+        <div class="form-hint">Press Enter after each skill. e.g. Python, Java, C++, JavaScript</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Frameworks & Libraries</label>
+        <div class="skills-input-wrap" id="skills-fw-wrap" onclick="document.getElementById('skill-fw-input').focus()">
+          ${(S.applyData.skillsFw||[]).map(s=>`<div class="skill-tag">${s}<button onclick="removeSkill('fw','${s}')">×</button></div>`).join('')}
+          <input id="skill-fw-input" class="skill-input-field" placeholder="React, Spring Boot, TensorFlow..." onkeydown="addSkill(event,'fw')"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Tools & Platforms</label>
+        <div class="skills-input-wrap" id="skills-tools-wrap" onclick="document.getElementById('skill-tools-input').focus()">
+          ${(S.applyData.skillsTools||[]).map(s=>`<div class="skill-tag">${s}<button onclick="removeSkill('tools','${s}')">×</button></div>`).join('')}
+          <input id="skill-tools-input" class="skill-input-field" placeholder="Git, Docker, AWS, MySQL..." onkeydown="addSkill(event,'tools')"/>
+        </div>
+      </div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-title">INTERNSHIPS</div>
+      <div class="form-group"><label class="form-label">Internship / Work Experience</label>
+        <textarea class="form-textarea" id="f-internship" rows="3" placeholder="Company Name, Role, Duration, Key Responsibilities & Impact...">${S.applyData.internship||''}</textarea></div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-title">PROJECTS</div>
+      <div class="form-group"><label class="form-label">Project 1 <span class="req">*</span></label>
+        <input class="form-input" id="f-proj1-name" placeholder="Project Title" value="${S.applyData.proj1name||''}" style="margin-bottom:.5rem"/>
+        <textarea class="form-textarea" id="f-proj1-desc" rows="2" placeholder="Brief description, tech stack, and impact...">${S.applyData.proj1desc||''}</textarea></div>
+      <div class="form-group"><label class="form-label">Project 2</label>
+        <input class="form-input" id="f-proj2-name" placeholder="Project Title" value="${S.applyData.proj2name||''}" style="margin-bottom:.5rem"/>
+        <textarea class="form-textarea" id="f-proj2-desc" rows="2" placeholder="Brief description, tech stack, and impact...">${S.applyData.proj2desc||''}</textarea></div>
+      <div class="form-group"><label class="form-label">Achievements / Hackathons / Certifications</label>
+        <textarea class="form-textarea" id="f-achievements" rows="2" placeholder="Any awards, hackathon wins, certifications, competitive coding ranks...">${S.applyData.achievements||''}</textarea></div>
+    </div>
+    <div style="display:flex;justify-content:space-between">
+      <button class="btn btn-ghost" onclick="renderApplyStep(1)">← Back</button>
+      <button class="btn btn-primary" onclick="saveStep2()">Next: Upload Resume →</button>
+    </div>`,
+
+    // Step 3: Resume Upload
+    `${progress}
+    <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.25rem">Upload Resume</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">Upload your latest resume. PDF format preferred.</p>
+    <div class="form-section">
+      <div class="form-section-title">RESUME / CV</div>
+      <div id="upload-area" class="upload-box" onclick="document.getElementById('resume-file').click()">
+        <div class="upload-icon">📄</div>
+        <p><strong>Click to upload</strong> or drag & drop<br/>PDF, DOC, DOCX · Max 5MB</p>
+        <input type="file" id="resume-file" accept=".pdf,.doc,.docx" style="display:none" onchange="handleResumeUpload(event)"/>
+      </div>
+      <div id="upload-status" style="display:none;margin-top:.75rem"></div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-title">COVER LETTER (OPTIONAL)</div>
+      <div class="form-group"><label class="form-label">Why NexaCore? <span style="color:var(--muted);font-weight:400">(optional)</span></label>
+        <textarea class="form-textarea" id="f-coverletter" rows="5" placeholder="Tell us why you want to join NexaCore and what you'll bring to the team...">${S.applyData.coverletter||''}</textarea>
+        <div class="form-hint">250–500 words recommended. This is your chance to stand out.</div>
+      </div>
+      <div class="form-group"><label class="form-label">How did you hear about us?</label>
+        <select class="form-select" id="f-source">
+          <option>College Placement Cell</option><option>LinkedIn</option><option>NexaCore Website</option>
+          <option>Friend / Referral</option><option>Naukri / Indeed</option><option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-section">
+      <div class="form-section-title">DECLARATIONS</div>
+      <div style="display:flex;flex-direction:column;gap:.75rem">
+        <label style="display:flex;gap:.75rem;align-items:flex-start;cursor:pointer;font-size:.82rem">
+          <input type="checkbox" id="decl-1" style="margin-top:3px;flex-shrink:0"/>
+          I confirm that all information provided is accurate and complete. I understand that any misrepresentation may result in disqualification.
+        </label>
+        <label style="display:flex;gap:.75rem;align-items:flex-start;cursor:pointer;font-size:.82rem">
+          <input type="checkbox" id="decl-2" style="margin-top:3px;flex-shrink:0"/>
+          I agree to NexaCore's <span style="color:var(--accent)">Privacy Policy</span> and <span style="color:var(--accent)">Terms of Service</span>, and consent to background verification if selected.
+        </label>
+        <label style="display:flex;gap:.75rem;align-items:flex-start;cursor:pointer;font-size:.82rem">
+          <input type="checkbox" id="decl-3" style="margin-top:3px;flex-shrink:0"/>
+          I confirm I am available to join by August 1, 2025.
+        </label>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between">
+      <button class="btn btn-ghost" onclick="renderApplyStep(2)">← Back</button>
+      <button class="btn btn-primary" onclick="saveStep3()">Next: Review →</button>
+    </div>`,
+
+    // Step 4: Review
+    `${progress}
+    <h2 style="font-size:1.3rem;font-weight:800;letter-spacing:-.5px;margin-bottom:.25rem">Review & Submit</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:1.5rem">Please review all information before submitting.</p>
+    <div class="card" style="margin-bottom:1rem;padding:1.25rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+        <strong style="font-size:.85rem">Personal Information</strong>
+        <button onclick="renderApplyStep(0)" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:.78rem;font-family:var(--font)">Edit</button>
+      </div>
+      <div style="font-size:.82rem;color:var(--muted);line-height:2">
+        <strong style="color:var(--text)">${S.applyData.fname||''} ${S.applyData.lname||''}</strong><br/>
+        📧 ${S.applyData.email||'—'} · 📞 ${S.applyData.phone||'—'}<br/>
+        📍 ${S.applyData.city||'—'}
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem;padding:1.25rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+        <strong style="font-size:.85rem">Education</strong>
+        <button onclick="renderApplyStep(1)" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:.78rem;font-family:var(--font)">Edit</button>
+      </div>
+      <div style="font-size:.82rem;color:var(--muted);line-height:2">
+        <strong style="color:var(--text)">${S.applyData.college||'—'}</strong><br/>
+        ${S.applyData.degree||'B.Tech'} · ${S.applyData.branch||'—'} · ${S.applyData.gradyear||'2025'}<br/>
+        CGPA: ${S.applyData.cgpa||'—'}
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1rem;padding:1.25rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+        <strong style="font-size:.85rem">Skills</strong>
+        <button onclick="renderApplyStep(2)" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:.78rem;font-family:var(--font)">Edit</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:.35rem">
+        ${[...(S.applyData.skillsLang||[]),...(S.applyData.skillsFw||[]),...(S.applyData.skillsTools||[])].map(s=>`<span class="tag tag-blue">${s}</span>`).join('')}
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:1.5rem;padding:1.25rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem">
+        <strong style="font-size:.85rem">Resume</strong>
+        <button onclick="renderApplyStep(3)" style="background:none;border:none;color:var(--accent);cursor:pointer;font-size:.78rem;font-family:var(--font)">Edit</button>
+      </div>
+      <div style="font-size:.82rem;color:var(--muted)">${S.applyData.resumeName||'No file uploaded'}</div>
+    </div>
+    <div style="background:var(--warm);border:1px solid var(--border);border-radius:4px;padding:1rem;margin-bottom:1.5rem;font-size:.8rem;color:var(--muted);line-height:1.7">
+      ⚡ By submitting, you agree that the above information is accurate. NexaCore will contact you at <strong style="color:var(--text)">${S.applyData.email||'your email'}</strong> for all recruitment communications.
+    </div>
+    <div style="display:flex;justify-content:space-between">
+      <button class="btn btn-ghost" onclick="renderApplyStep(3)">← Back</button>
+      <button class="btn btn-primary" onclick="submitApplication()" style="background:var(--success);padding:14px 36px">🚀 Submit Application</button>
+    </div>`
+  ];
+
+  main.innerHTML = `<div class="fade-in">${forms[step] || ''}</div>`;
+}
+
+function saveStep0() {
+  const fname = document.getElementById('f-fname').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if(!fname || !email){ showToast('⚠️','Missing Fields','Please fill First Name and Email.'); return; }
+  Object.assign(S.applyData, { fname, lname: document.getElementById('f-lname').value.trim(), email, phone: document.getElementById('f-phone').value.trim(), city: document.getElementById('f-city').value.trim(), state: document.getElementById('f-state').value.trim(), pin: document.getElementById('f-pin').value.trim(), gender: document.getElementById('f-gender').value, linkedin: document.getElementById('f-linkedin').value.trim(), github: document.getElementById('f-github').value.trim(), employed: document.getElementById('f-employed').value });
+  S.user = { name: `${fname} ${S.applyData.lname}`, email };
+  renderApplyStep(1);
+}
+function saveStep1() {
+  const college = document.getElementById('f-college').value.trim();
+  if(!college){ showToast('⚠️','Missing Fields','Please enter your college name.'); return; }
+  Object.assign(S.applyData, { college, degree: document.getElementById('f-degree').value, branch: document.getElementById('f-branch').value.trim(), gradyear: document.getElementById('f-gradyear').value, cgpa: document.getElementById('f-cgpa').value.trim(), board12: document.getElementById('f-board12').value.trim(), pct12: document.getElementById('f-pct12').value.trim(), board10: document.getElementById('f-board10').value.trim(), pct10: document.getElementById('f-pct10').value.trim() });
+  renderApplyStep(2);
+}
+function saveStep2() {
+  Object.assign(S.applyData, { internship: document.getElementById('f-internship').value.trim(), proj1name: document.getElementById('f-proj1-name').value.trim(), proj1desc: document.getElementById('f-proj1-desc').value.trim(), proj2name: document.getElementById('f-proj2-name').value.trim(), proj2desc: document.getElementById('f-proj2-desc').value.trim(), achievements: document.getElementById('f-achievements').value.trim() });
+  renderApplyStep(3);
+}
+function saveStep3() {
+  if(!document.getElementById('decl-1').checked || !document.getElementById('decl-2').checked){ showToast('⚠️','Declarations Required','Please check all required declarations.'); return; }
+  Object.assign(S.applyData, { coverletter: document.getElementById('f-coverletter').value.trim(), source: document.getElementById('f-source').value });
+  renderApplyStep(4);
+}
+
+function addSkill(e, type) {
+  if(e.key !== 'Enter') return;
+  e.preventDefault();
+  const input = document.getElementById(`skill-${type}-input`);
+  const val = input.value.trim();
+  if(!val) return;
+  const key = type === 'lang' ? 'skillsLang' : type === 'fw' ? 'skillsFw' : 'skillsTools';
+  if(!S.applyData[key]) S.applyData[key] = [];
+  if(!S.applyData[key].includes(val)) S.applyData[key].push(val);
+  input.value = '';
+  renderApplyStep(2);
+}
+function removeSkill(type, val) {
+  const key = type === 'lang' ? 'skillsLang' : type === 'fw' ? 'skillsFw' : 'skillsTools';
+  S.applyData[key] = (S.applyData[key]||[]).filter(s=>s!==val);
+  renderApplyStep(2);
+}
+
+function handleResumeUpload(e) {
+  const file = e.target.files[0];
+  if(!file) return;
+  S.applyData.resumeName = file.name;
+  S.applyData.resumeUploaded = true;
+  const area = document.getElementById('upload-area');
+  area.className = 'upload-box upload-done';
+  area.innerHTML = `<div style="font-size:2rem">✅</div><p><strong>${file.name}</strong><br/>${(file.size/1024).toFixed(0)} KB · Uploaded successfully</p>`;
+}
+
+function submitApplication() {
+  if(!S.applyData.fname){ showToast('⚠️','Incomplete','Please fill in all required steps.'); return; }
+  S.appId = 'NC' + Date.now().toString().slice(-6);
+  S.stage = 'applied';
+  const cfg = ROLE_CONFIG[S.appliedRole] || ROLE_CONFIG.sde1;
+  // Show user pill
+  document.getElementById('user-pill').classList.remove('hidden');
+  document.getElementById('user-av-initials').textContent = (S.applyData.fname[0]||'?')+(S.applyData.lname[0]||'');
+  document.getElementById('user-pill-name').textContent = S.applyData.fname;
+  document.getElementById('nav-dashboard').style.display = '';
+  document.getElementById('nav-inbox').style.display = '';
+  document.getElementById('notif-bell').style.display = '';
+  // Send confirmation email
+  setTimeout(()=>{ addEmail('application_received', S.applyData.fname); showToast('🎉','Application Submitted!',`App ID: NC-${S.appId} · ${cfg.title}`); },500);
+  setTimeout(()=>{ S.stage='screening'; addEmail('shortlisted', S.applyData.fname); showToast('📬','New Email!','You have been shortlisted! Check your inbox.'); addNotif('🎯','Shortlisted!',`MCQ scheduled for ${cfg.title}`); renderDashboard(); },2500);
+  goTo('dashboard');
+  renderDashboard();
+}
+
+// ══════════════════════════════════════════════════════════════
+// DASHBOARD
+// ══════════════════════════════════════════════════════════════
+const TIMELINE_STEPS = [
+  { id:'applied', label:'Application Submitted', sub:'Your profile is under review', icon:'📋' },
+  { id:'screening', label:'Shortlisted for Assessment', sub:'Resume screening cleared', icon:'✅' },
+  { id:'mcq', label:'MCQ Assessment', sub:'Round 1 · 100 Questions · 90 min', icon:'📝' },
+  { id:'coding', label:'Coding Round', sub:'Round 2 · 3 Problems · 60 min', icon:'💻' },
+  { id:'hr', label:'HR Interview', sub:'Round 3 · AI Behavioral Interview', icon:'🤖' },
+  { id:'decision', label:'Final Decision', sub:'Offer letter / Feedback', icon:'🎯' },
+  { id:'onboarding', label:'Onboarding', sub:'Document verification & Day 1 prep', icon:'🎊' },
+];
+
+function renderDashboard() {
+  const name = S.applyData.fname || 'Candidate';
+  document.getElementById('dash-greeting').textContent = `Hello, ${name}! 👋`;
+  document.getElementById('dash-appid').textContent = `NC-${S.appId}`;
+
+  // Stage tag
+  const stageNames = { applied:'Under Review', screening:'Shortlisted', mcq:'MCQ Round', coding:'Coding Round', hr:'HR Interview', decision:'Decision Pending', onboarding:'Onboarding' };
+  const el = document.getElementById('dash-stage-tag');
+  if(el) el.textContent = stageNames[S.stage] || S.stage;
+
+  const stageOrder = ['applied','screening','mcq','coding','hr','decision','onboarding'];
+  const si = stageOrder.indexOf(S.stage);
+
+  // Timeline
+  const tl = document.getElementById('recruitment-timeline');
+  tl.innerHTML = TIMELINE_STEPS.map((step,i)=>{
+    const stepSi = stageOrder.indexOf(step.id);
+    let status = stepSi < si ? 'done' : stepSi === si ? 'active' : 'pending';
+    return `<div class="tl-item">
+      <div class="tl-dot ${status}"></div>
+      <div class="tl-title">${step.icon} ${step.label}</div>
+      <div class="tl-sub">${step.sub}</div>
+      ${status==='active'?`<div class="tl-badge"><span class="tag tag-blue pulse">● CURRENT STAGE</span></div>`:''}
+      ${status==='done'?`<div class="tl-badge"><span class="tag tag-green">✓ Completed</span></div>`:''}
+    </div>`;
+  }).join('');
+
+  // Scores
+  const sc = document.getElementById('score-card');
+  if(sc && (S.scores.mcq || S.scores.coding || S.scores.hr)){
+    sc.style.display = 'block';
+    document.getElementById('score-appid').textContent = `NC-${S.appId}`;
+    const maxA=120,maxB=120,maxC=100,maxHR=100;
+    document.getElementById('score-rows').innerHTML = [
+      S.scores.mcqA ? `<div class="score-row"><span>MCQ Section A</span><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${S.scores.mcqA/maxA*100}%"></div></div><span class="score-val">${S.scores.mcqA}</span></div>` : '',
+      S.scores.mcqB ? `<div class="score-row"><span>MCQ Section B</span><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${S.scores.mcqB/maxB*100}%"></div></div><span class="score-val">${S.scores.mcqB}</span></div>` : '',
+      S.scores.coding ? `<div class="score-row"><span>Coding Round</span><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${S.scores.coding}%"></div></div><span class="score-val">${S.scores.coding}%</span></div>` : '',
+      S.scores.hr ? `<div class="score-row"><span>HR Interview</span><div class="score-bar-wrap"><div class="score-bar-fill" style="width:${S.scores.hr}%"></div></div><span class="score-val">${S.scores.hr}%</span></div>` : '',
+    ].join('');
+  }
+
+  // Action button
+  const actionBtn = document.getElementById('dash-action-btn');
+  const qa = document.getElementById('quick-actions');
+  if(actionBtn) {
+    const actions = {
+      applied: ['Wait for shortlisting...', null],
+      screening: ['Begin MCQ Test →', ()=>{ goTo('mcq'); startMCQ(); }],
+      mcq: ['Begin MCQ Test →', ()=>{ goTo('mcq'); startMCQ(); }],
+      coding: ['Begin Coding Round →', ()=>{ goTo('coding'); initCoding(); }],
+      hr: ['Begin HR Interview →', ()=>{ goTo('hr'); initHR(); }],
+      decision: ['View Decision →', ()=>{ goTo('decision'); }],
+      onboarding: ['Continue Onboarding →', ()=>{ goTo('onboarding'); renderOnboarding(); }],
+    };
+    const [label, fn] = actions[S.stage] || ['Dashboard', null];
+    actionBtn.textContent = label;
+    actionBtn.onclick = fn || (()=>{});
+    actionBtn.disabled = !fn;
+  }
+  if(qa) qa.innerHTML = `
+    <button class="btn btn-ghost btn-sm" style="justify-content:flex-start" onclick="goTo('inbox')">📬 View Emails (${S.emails.filter(e=>e.unread).length} unread)</button>
+    <button class="btn btn-ghost btn-sm" style="justify-content:flex-start" onclick="goTo('apply')">✏️ Edit Application</button>
+  `;
+
+  updateLatestEmailPreview();
+}
+
+// ══════════════════════════════════════════════════════════════
+// INBOX
+// ══════════════════════════════════════════════════════════════
+let activeEmailId = null;
+function renderInbox() {
+  const list = document.getElementById('inbox-list-items');
+  if(!list) return;
+  const unread = S.emails.filter(e=>e.unread).length;
+  const uc = document.getElementById('unread-count-tag');
+  if(uc) uc.textContent = `${unread} unread`;
+  list.innerHTML = S.emails.map(e=>`
+    <div class="inbox-item ${e.unread?'unread':''} ${activeEmailId===e.id?'active':''}" onclick="openEmail('${e.id}')">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div style="flex:1;min-width:0">
+          <div class="inbox-sender">${e.fromName}</div>
+          <div class="inbox-subject">${e.subject}</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:.3rem;flex-shrink:0;margin-left:.5rem">
+          <div class="inbox-time">${e.time}</div>
+          ${e.unread?'<div class="inbox-unread-dot"></div>':''}
+        </div>
+      </div>
+    </div>
+  `).join('') || '<div style="padding:2rem;text-align:center;color:var(--muted);font-size:.82rem">No emails yet</div>';
+}
+function openEmail(id) {
+  activeEmailId = id;
+  const email = S.emails.find(e=>e.id===id);
+  if(!email) return;
+  email.unread = false;
+  renderInbox();
+  const pane = document.getElementById('email-view-pane');
+  pane.innerHTML = `
+    <div class="email-view-header">
+      <div class="email-view-subject">${email.subject}</div>
+      <div class="email-meta-row">
+        <div class="email-avatar-sm">${email.fromName[0]}</div>
+        <div><strong>${email.fromName}</strong> &lt;${email.from}&gt;</div>
+        <span>·</span><span>${email.time}</span>
+      </div>
+    </div>
+    <div class="email-full-body">${email.body}</div>
+  `;
+}
+
+// ══════════════════════════════════════════════════════════════
+// MCQ
+// ══════════════════════════════════════════════════════════════
+const QS = [
+  // Section A (0-39)
+  {s:'A',c:'Aptitude',q:'A train 240m long passes a pole in 24 secs. Speed (km/h):',o:['36','40','42','45'],a:0},
+  {s:'A',c:'Aptitude',q:'If 15 men complete work in 12 days, 9 men complete it in:',o:['18 days','20 days','22 days','24 days'],a:1},
+  {s:'A',c:'Aptitude',q:'A shopkeeper sells goods at 20% profit. Cost is ₹800, selling price:',o:['₹920','₹960','₹1000','₹940'],a:1},
+  {s:'A',c:'Aptitude',q:'What is 35% of 480?',o:['156','168','172','164'],a:1},
+  {s:'A',c:'Aptitude',q:'Average of 5 numbers is 27. If one excluded, average becomes 25. Excluded number:',o:['35','34','37','39'],a:0},
+  {s:'A',c:'Aptitude',q:'Pipe A fills tank in 12h, B in 18h. Together they fill in:',o:['7.2h','6.5h','7h','8h'],a:0},
+  {s:'A',c:'Aptitude',q:'Rs 5000 at 8% p.a. compound interest for 2 years gives:',o:['₹5832','₹5920','₹5800','₹5864'],a:0},
+  {s:'A',c:'Aptitude',q:'Speed of boat in still water 15 kmph, stream 3 kmph. Downstream speed:',o:['12','18','15','21'],a:1},
+  {s:'A',c:'Aptitude',q:'A can do work in 16 days, B in 24 days. Together:',o:['9.6 days','10 days','9 days','10.5 days'],a:0},
+  {s:'A',c:'Aptitude',q:'Cost price of 15 articles = selling price of 12. Profit %:',o:['20%','25%','15%','30%'],a:1},
+  {s:'A',c:'Verbal',q:'Word closest in meaning to BENEVOLENT:',o:['Malicious','Kind','Strict','Indifferent'],a:1},
+  {s:'A',c:'Verbal',q:'Antonym of VERBOSE:',o:['Talkative','Concise','Loud','Eloquent'],a:1},
+  {s:'A',c:'Verbal',q:'Fill in: The committee __ yet to reach a decision.',o:['is','are','has','have'],a:0},
+  {s:'A',c:'Verbal',q:'Correctly spelled word:',o:['Accomodation','Accommodation','Acomodation','Acommodation'],a:1},
+  {s:'A',c:'Verbal',q:'One word for "A person who compiles a dictionary":',o:['Bibliophile','Lexicographer','Etymologist','Linguist'],a:1},
+  {s:'A',c:'Verbal',q:'Synonym of EPHEMERAL:',o:['Eternal','Transient','Solid','Frequent'],a:1},
+  {s:'A',c:'Verbal',q:'Passive voice of "She sings a song":',o:['A song was sung by her','A song is sung by her','A song has been sung','A song will be sung'],a:1},
+  {s:'A',c:'Verbal',q:'He was acquitted __ all charges.',o:['from','of','with','by'],a:1},
+  {s:'A',c:'Verbal',q:'Fill in: I look forward to __ from you.',o:['hear','heard','hearing','have heard'],a:2},
+  {s:'A',c:'Verbal',q:'Identify grammatical error: "The datas are collected."',o:['The','datas','are','collected'],a:1},
+  {s:'A',c:'Reasoning',q:'Next in series: 2, 6, 12, 20, 30, __',o:['40','42','44','45'],a:1},
+  {s:'A',c:'Reasoning',q:'A is B\'s sister. C is B\'s mother. D is C\'s father. How is A related to D?',o:['Grand daughter','Daughter','Sister','Niece'],a:0},
+  {s:'A',c:'Reasoning',q:'Complete: Pen : Write :: Knife : __',o:['Cut','Sharp','Metal','Cook'],a:0},
+  {s:'A',c:'Reasoning',q:'Find odd one out: 3, 5, 7, 9, 11',o:['9','11','3','5'],a:0},
+  {s:'A',c:'Reasoning',q:'If 5 cats kill 5 rats in 5 mins, 100 cats kill 100 rats in:',o:['100 mins','5 mins','20 mins','50 mins'],a:1},
+  {s:'A',c:'Reasoning',q:'In a row of 40 students, Riya is 15th from left. Position from right:',o:['25th','26th','27th','24th'],a:1},
+  {s:'A',c:'Reasoning',q:'Look at series: ZA5, Y4B, XC6, W3D, __',o:['VE7','V7E','7VE','EV7'],a:0},
+  {s:'A',c:'Reasoning',q:'Two numbers in ratio 3:4. LCM is 120. Their sum:',o:['70','60','80','75'],a:0},
+  {s:'A',c:'Reasoning',q:'How many times do clock hands overlap in 24 hours?',o:['22','24','21','23'],a:0},
+  {s:'A',c:'Aptitude',q:'What is the probability of getting sum 7 with two dice?',o:['1/6','5/36','6/36','7/36'],a:2},
+  {s:'A',c:'Reasoning',q:'ACEG : BDFH :: QSUW : ?',o:['RTVX','PRTU','STVX','RTUW'],a:0},
+  {s:'A',c:'Aptitude',q:'Rs 800 invested at 5% p.a. SI for 3 years earns:',o:['Rs 120','Rs 125','Rs 130','Rs 115'],a:0},
+  {s:'A',c:'Reasoning',q:'Complete analogy: Flower : Bouquet :: Star : __',o:['Moon','Galaxy','Sky','Planet'],a:1},
+  {s:'A',c:'Aptitude',q:'Insert missing number: 8, 27, 64, 125, __',o:['196','216','256','225'],a:1},
+  {s:'A',c:'Aptitude',q:'A man rows upstream at 5 kmph, downstream at 11 kmph. Still water speed:',o:['8','7','9','6'],a:0},
+  {s:'A',c:'Aptitude',q:'A 20% discount on ₹500, then 10% discount. Final price:',o:['₹360','₹350','₹380','₹370'],a:0},
+  {s:'A',c:'Reasoning',q:'If 20% of x = 15% of y, then x:y is:',o:['3:4','4:3','3:5','5:3'],a:0},
+  {s:'A',c:'Aptitude',q:'Two pipes A and B fill a tank in 20 and 30 mins. C empties in 15 mins. All open — tank fills in:',o:['Never','60 mins','120 mins','30 mins'],a:0},
+  {s:'A',c:'Reasoning',q:'Pointing to a lady: "She is the daughter of my father\'s only son\'s wife." How is she related?',o:['Daughter','Sister','Niece','Cousin'],a:0},
+  {s:'A',c:'Aptitude',q:'A boat covers 24 km upstream in 6h and 20 km downstream in 4h. Speed of stream:',o:['1 kmph','2 kmph','3 kmph','4 kmph'],a:0},
+  // Section B (40-99)
+  {s:'B',c:'DSA',q:'Time complexity of binary search on sorted array:',o:['O(n)','O(log n)','O(n²)','O(1)'],a:1},
+  {s:'B',c:'DSA',q:'Which data structure uses FIFO principle?',o:['Stack','Queue','Tree','Graph'],a:1},
+  {s:'B',c:'DSA',q:'Height of balanced BST with n nodes:',o:['O(n)','O(n²)','O(log n)','O(1)'],a:2},
+  {s:'B',c:'DSA',q:'Best sorting algorithm for nearly-sorted data:',o:['Quick Sort','Merge Sort','Insertion Sort','Heap Sort'],a:2},
+  {s:'B',c:'DSA',q:'Which BST traversal gives sorted output?',o:['Pre-order','Post-order','In-order','Level-order'],a:2},
+  {s:'B',c:'DSA',q:'Worst-case time complexity of Quick Sort:',o:['O(n log n)','O(n)','O(n²)','O(log n)'],a:2},
+  {s:'B',c:'DSA',q:'Space complexity of merge sort:',o:['O(1)','O(log n)','O(n)','O(n log n)'],a:2},
+  {s:'B',c:'DSA',q:'Which graph algorithm finds shortest path (unweighted)?',o:['DFS','BFS','Dijkstra','Prim'],a:1},
+  {s:'B',c:'DSA',q:'Average-case time complexity of hash table access:',o:['O(n)','O(log n)','O(1)','O(n²)'],a:2},
+  {s:'B',c:'DSA',q:'Which is NOT a stable sorting algorithm?',o:['Merge Sort','Bubble Sort','Insertion Sort','Quick Sort'],a:3},
+  {s:'B',c:'OOP',q:'Function overloading implements which OOP principle?',o:['Inheritance','Encapsulation','Polymorphism','Abstraction'],a:2},
+  {s:'B',c:'OOP',q:'A class that cannot be instantiated:',o:['Static','Abstract','Final','Interface'],a:1},
+  {s:'B',c:'OOP',q:'Method overriding means:',o:['Same name in same class','Subclass redefines parent method','Method with defaults','Constructor chaining'],a:1},
+  {s:'B',c:'OOP',q:'Which keyword prevents inheritance in Java?',o:['static','abstract','final','private'],a:2},
+  {s:'B',c:'OOP',q:'Purpose of constructor in OOP:',o:['Destroy object','Initialize object','Inherit class','Override method'],a:1},
+  {s:'B',c:'OOP',q:'In Python, "self" refers to:',o:['Parent class','Current instance','Global variable','Module'],a:1},
+  {s:'B',c:'OOP',q:'Multiple inheritance NOT directly supported in:',o:['Python','C++','Java','None'],a:2},
+  {s:'B',c:'OOP',q:'"HAS-A" relationship represents:',o:['Inheritance','Composition','Polymorphism','Abstraction'],a:1},
+  {s:'B',c:'OOP',q:'Interface in OOP is:',o:['Fully implemented class','Abstract class','Contract with method signatures','Private class'],a:2},
+  {s:'B',c:'OOP',q:'Encapsulation best described as:',o:['Inheriting features','Hiding internal details','Overloading methods','Creating multiple objects'],a:1},
+  {s:'B',c:'OS',q:'Deadlock requires all EXCEPT:',o:['Mutual Exclusion','Preemption','Hold and Wait','Circular Wait'],a:1},
+  {s:'B',c:'OS',q:'Page replacement with Belady\'s anomaly:',o:['LRU','Optimal','FIFO','LFU'],a:2},
+  {s:'B',c:'OS',q:'Context switching performed by:',o:['Compiler','OS Kernel','User Program','Hardware'],a:1},
+  {s:'B',c:'OS',q:'Semaphore used for:',o:['Memory management','Process synchronization','CPU scheduling','File management'],a:1},
+  {s:'B',c:'OS',q:'Virtual memory allows:',o:['Programs larger than RAM','Faster CPU','More cores','Better I/O'],a:0},
+  {s:'B',c:'OS',q:'Non-preemptive scheduling by default:',o:['Round Robin','SJF','FCFS','Priority'],a:2},
+  {s:'B',c:'OS',q:'Thrashing occurs when:',o:['CPU utilization is high','Too many page faults','Memory is freed','Disk is full'],a:1},
+  {s:'B',c:'OS',q:'Fork() system call creates:',o:['Thread','Child process','File','Socket'],a:1},
+  {s:'B',c:'OS',q:'Difference between process and thread:',o:['Process has less memory','Thread shares address space','Process is faster','No difference'],a:1},
+  {s:'B',c:'OS',q:'Which is NOT part of PCB?',o:['Process ID','Program counter','Source code','Register values'],a:2},
+  {s:'B',c:'DBMS',q:'Normal form removing partial dependencies:',o:['1NF','2NF','3NF','BCNF'],a:1},
+  {s:'B',c:'DBMS',q:'ACID stands for:',o:['Atomicity, Consistency, Isolation, Durability','Access, Control, Integration, Data','Atomic, Concurrent, Independent, Distributed','None'],a:0},
+  {s:'B',c:'DBMS',q:'JOIN returning all records from both tables:',o:['INNER JOIN','LEFT JOIN','RIGHT JOIN','FULL OUTER JOIN'],a:3},
+  {s:'B',c:'DBMS',q:'SQL clause filtering after GROUP BY:',o:['WHERE','HAVING','FILTER','AND'],a:1},
+  {s:'B',c:'DBMS',q:'B+ Tree preferred over B-Tree because:',o:['Faster insert','All data in leaf — better range queries','Less memory','Simpler'],a:1},
+  {s:'B',c:'DBMS',q:'Which is NOT a DDL command?',o:['CREATE','ALTER','DROP','INSERT'],a:3},
+  {s:'B',c:'DBMS',q:'Phantom read at which isolation level?',o:['Serializable','Repeatable Read','Read Committed','Read Uncommitted'],a:1},
+  {s:'B',c:'DBMS',q:'Foreign key refers to:',o:['Candidate key','Alternate key','Primary key in another table','Super key'],a:2},
+  {s:'B',c:'Networks',q:'Layer responsible for end-to-end delivery:',o:['Network','Transport','Data Link','Application'],a:1},
+  {s:'B',c:'Networks',q:'TCP vs UDP: which provides reliable delivery?',o:['UDP','TCP','Both','Neither'],a:1},
+  {s:'B',c:'Networks',q:'HTTP default port:',o:['443','21','80','22'],a:2},
+  {s:'B',c:'Networks',q:'Which protocol is used for email sending?',o:['IMAP','POP3','SMTP','FTP'],a:2},
+  {s:'B',c:'Networks',q:'Purpose of ARP:',o:['Route packets','Resolve IP to MAC','Assign IP','Encrypt traffic'],a:1},
+  {s:'B',c:'Networks',q:'Class C IP supports how many hosts?',o:['254','256','65534','126'],a:0},
+  {s:'B',c:'CS',q:'Recursion requires which data structure implicitly?',o:['Queue','Heap','Stack','Array'],a:2},
+  {s:'B',c:'CS',q:'Python list comprehension [x*2 for x in range(3)]:',o:['[0,2,4]','[2,4,6]','[1,2,3]','[0,1,2]'],a:0},
+  {s:'B',c:'CS',q:'Design pattern ensuring single instance:',o:['Factory','Singleton','Observer','Decorator'],a:1},
+  {s:'B',c:'CS',q:'Git command to stage all changes:',o:['git commit','git push','git add .','git merge'],a:2},
+  {s:'B',c:'CS',q:'2\'s complement of 0110 is:',o:['1001','1010','1011','1100'],a:1},
+  {s:'B',c:'CS',q:'REST API uses which protocol?',o:['FTP','SMTP','HTTP','TCP directly'],a:2},
+  {s:'B',c:'CS',q:'Which is a lossless compression format?',o:['JPEG','MP3','PNG','MPEG'],a:2},
+  {s:'B',c:'CS',q:'Time complexity of accessing element in sorted array by index:',o:['O(n)','O(log n)','O(1)','O(n²)'],a:2},
+  {s:'B',c:'CS',q:'Which is NOT a programming paradigm?',o:['OOP','Functional','Procedural','Compilation'],a:3},
+  {s:'B',c:'CS',q:'What does REST stand for?',o:['Remote Execution State Transfer','Representational State Transfer','Remote State Technology','Rapid Execution Service Transfer'],a:1},
+  {s:'B',c:'CS',q:'In big O notation, which grows fastest?',o:['O(n log n)','O(2^n)','O(n³)','O(n!)'],a:3},
+  {s:'B',c:'CS',q:'NULL pointer dereference is an example of:',o:['Memory leak','Segmentation fault','Buffer overflow','Stack overflow'],a:1},
+  {s:'B',c:'CS',q:'Which data structure implements call stack in programming?',o:['Queue','Linked List','Stack','Tree'],a:2},
+  {s:'B',c:'CS',q:'CAP theorem stands for:',o:['Consistency, Availability, Partition tolerance','Concurrency, Atomicity, Performance','Caching, Allocation, Persistence','None'],a:0},
+  {s:'B',c:'CS',q:'Docker containers differ from VMs because:',o:['Slower performance','Share host OS kernel','Require more memory','Need hypervisor'],a:1},
+  {s:'B',c:'CS',q:'Which HTTP method is idempotent?',o:['POST','PUT','PATCH','None'],a:1},
+  {s:'B',c:'CS',q:'Microservices vs Monolith: microservices offer:',o:['Simpler deployment','Independent scaling','Less network calls','Single codebase'],a:1},
+];
+
+function startMCQ() {
+  // Render q dots
+  const qda = document.getElementById('qda'), qdb = document.getElementById('qdb');
+  if(!qda) return;
+  qda.innerHTML=''; qdb.innerHTML='';
+  for(let i=0;i<40;i++){
+    const d=document.createElement('div');
+    d.className=`qdot neg ${S.mcq.current===i?'cur':''}`;
+    d.id=`qd${i}`; d.textContent=i+1;
+    d.onclick=()=>renderQ(i); qda.appendChild(d);
+  }
+  for(let i=40;i<100;i++){
+    const d=document.createElement('div');
+    d.className=`qdot ${S.mcq.current===i?'cur':''}`;
+    d.id=`qd${i}`; d.textContent=i+1;
+    d.onclick=()=>renderQ(i); qdb.appendChild(d);
+  }
+  renderQ(0);
+  if(!S.mcq.interval) S.mcq.interval = setInterval(()=>{
+    S.mcq.remaining--;
+    const m=Math.floor(S.mcq.remaining/60),s=S.mcq.remaining%60;
+    const el=document.getElementById('mcq-timer');
+    if(el){ el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      el.className=`test-timer${S.mcq.remaining<300?' danger':S.mcq.remaining<900?' warn':''}`;
+    }
+    if(S.mcq.remaining<=0) submitMCQ();
+  },1000);
+}
+
+function renderQ(idx) {
+  S.mcq.current=idx;
+  document.querySelectorAll('.qdot').forEach((d,i)=>{
+    d.classList.remove('cur','ans','flag');
+    if(i===idx) d.classList.add('cur');
+    else if(S.mcq.flagged.has(i)) d.classList.add('flag');
+    else if(S.mcq.answers[i]!==null) d.classList.add('ans');
+  });
+  document.getElementById('mcq-sec-lbl').textContent = idx<40?'Section A (Neg Marking)':'Section B (No Neg)';
+  const q=QS[idx],isNeg=idx<40;
+  const prog=Math.round((idx/100)*100);
+  document.getElementById('qmain').innerHTML=`
+    <div style="margin-bottom:1rem">
+      <div style="display:flex;justify-content:space-between;margin-bottom:.4rem"><span style="font-size:.72rem;color:var(--muted)">Progress</span><span style="font-size:.72rem;color:var(--muted)">${prog}%</span></div>
+      <div style="height:3px;background:var(--border);border-radius:2px;overflow:hidden"><div style="height:100%;width:${prog}%;background:var(--accent);border-radius:2px;transition:width .3s"></div></div>
+    </div>
+    <div class="qcard fade-in">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.9rem;flex-wrap:wrap;gap:.4rem">
+        <div style="display:flex;gap:.4rem">
+          <span class="tag ${isNeg?'tag-orange':'tag-green'}">${isNeg?'−1 neg':'No neg'}</span>
+          <span class="tag tag-blue">${q.c}</span>
+        </div>
+        <span style="font-family:var(--mono);font-size:.72rem;color:var(--muted)">Q${idx+1} of 100 · ${isNeg?'+3/−1':'+2/0'}</span>
+      </div>
+      <div class="qtext">${q.q}</div>
+      <div class="opts">
+        ${q.o.map((opt,i)=>`<div class="opt ${S.mcq.answers[idx]===i?'sel':''}" onclick="selOpt(${idx},${i})">
+          <div class="optkey">${String.fromCharCode(65+i)}</div>
+          <div style="font-size:.88rem;padding-top:2px">${opt}</div>
+        </div>`).join('')}
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:1.1rem;flex-wrap:wrap;gap:.5rem">
+        <button onclick="toggleFlag(${idx})" style="background:${S.mcq.flagged.has(idx)?'#fff8e1':'transparent'};border:1px solid ${S.mcq.flagged.has(idx)?'#f59e0b':'var(--border)'};color:${S.mcq.flagged.has(idx)?'#d97706':'var(--muted)'};padding:6px 14px;border-radius:3px;cursor:pointer;font-size:.75rem;font-family:var(--font)">
+          ${S.mcq.flagged.has(idx)?'🚩 Flagged':'⚑ Flag'}
+        </button>
+        <div style="display:flex;gap:.5rem">
+          ${idx>0?`<button onclick="renderQ(${idx-1})" style="background:var(--warm);border:1px solid var(--border);color:var(--text);padding:8px 18px;border-radius:3px;cursor:pointer;font-size:.8rem;font-family:var(--font);font-weight:600">← Prev</button>`:''}
+          ${idx<99?`<button onclick="renderQ(${idx+1})" style="background:var(--accent);border:none;color:#fff;padding:8px 20px;border-radius:3px;cursor:pointer;font-size:.8rem;font-family:var(--font);font-weight:600">Next →</button>`
+          :`<button onclick="submitMCQ()" style="background:var(--success);border:none;color:#fff;padding:8px 20px;border-radius:3px;cursor:pointer;font-size:.8rem;font-family:var(--font);font-weight:700">Submit Test</button>`}
+        </div>
+      </div>
+    </div>`;
+}
+function selOpt(qi,oi){ S.mcq.answers[qi]=oi; renderQ(qi); }
+function toggleFlag(i){ if(S.mcq.flagged.has(i))S.mcq.flagged.delete(i);else S.mcq.flagged.add(i); renderQ(i); }
+
+function submitMCQ() {
+  clearInterval(S.mcq.interval); S.mcq.interval=null;
+  let sA=0,sB=0;
+  for(let i=0;i<40;i++){ if(S.mcq.answers[i]===QS[i].a)sA+=3; else if(S.mcq.answers[i]!==null)sA-=1; }
+  for(let i=40;i<100;i++){ if(S.mcq.answers[i]===QS[i].a)sB+=2; }
+  S.scores.mcq=sA+sB; S.scores.mcqA=sA; S.scores.mcqB=sB;
+  const pass=sA>=0&&sB>=30&&(sA+sB)>=60;
+  S.stage = pass ? 'coding' : 'rejected_mcq';
+  addEmail('mcq_result', S.applyData.fname, sA+sB, pass);
+  showToast(pass?'✅':'❌', pass?'MCQ Cleared!':'Not Cleared', `Score: ${sA+sB}/240`);
+  goTo('dashboard'); renderDashboard();
+  if(!pass) setTimeout(()=>{ S.stage='applied'; renderDashboard(); },2000);
+}
+
+// ══════════════════════════════════════════════════════════════
+// CODING
+// ══════════════════════════════════════════════════════════════
+const PROBS = [
+  { title:'Two Sum', diff:'Easy', tags:['Array','Hash Map'],
+    desc:`Given an array of integers <code>nums</code> and integer <code>target</code>, return indices of two numbers that add up to target.\n\nYou may assume exactly one solution exists.`,
+    examples:[{i:'nums=[2,7,11,15], target=9',o:'[0,1]',e:'nums[0]+nums[1]=9'}],
+    tests:[{i:[[2,7,11,15],9],e:[0,1]},{i:[[3,2,4],6],e:[1,2]},{i:[[3,3],6],e:[0,1]}],
+    code:{ python:`def twoSum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i`,
+    javascript:`function twoSum(nums, target) {\n  const map = {};\n  for (let i = 0; i < nums.length; i++) {\n    const comp = target - nums[i];\n    if (map[comp] !== undefined) return [map[comp], i];\n    map[nums[i]] = i;\n  }\n}` }},
+  { title:'Longest Substring Without Repeating', diff:'Medium', tags:['String','Sliding Window'],
+    desc:`Given string <code>s</code>, find length of longest substring without repeating characters.`,
+    examples:[{i:'s="abcabcbb"',o:'3',e:'"abc" has length 3'},{i:'s="bbbbb"',o:'1'}],
+    tests:[{i:['abcabcbb'],e:3},{i:['bbbbb'],e:1},{i:['pwwkew'],e:3}],
+    code:{ python:`def lengthOfLongestSubstring(s):\n    char_set = set()\n    left = 0\n    max_len = 0\n    for right in range(len(s)):\n        while s[right] in char_set:\n            char_set.remove(s[left])\n            left += 1\n        char_set.add(s[right])\n        max_len = max(max_len, right - left + 1)\n    return max_len`,
+    javascript:`function lengthOfLongestSubstring(s) {\n  const set = new Set();\n  let left = 0, maxLen = 0;\n  for (let right = 0; right < s.length; right++) {\n    while (set.has(s[right])) set.delete(s[left++]);\n    set.add(s[right]);\n    maxLen = Math.max(maxLen, right - left + 1);\n  }\n  return maxLen;\n}` }},
+  { title:'Valid Parentheses', diff:'Easy', tags:['Stack','String'],
+    desc:`Given string <code>s</code> containing only <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code>, <code>']'</code>, determine if valid.`,
+    examples:[{i:'s="()"',o:'true'},{i:'s="()[]{}"',o:'true'},{i:'s="(]"',o:'false'}],
+    tests:[{i:['()'],e:true},{i:['()[]{}'],e:true},{i:['(]'],e:false}],
+    code:{ python:`def isValid(s):\n    stack = []\n    mapping = {')': '(', '}': '{', ']': '['}\n    for char in s:\n        if char in mapping:\n            top = stack.pop() if stack else '#'\n            if mapping[char] != top:\n                return False\n        else:\n            stack.append(char)\n    return not stack`,
+    javascript:`function isValid(s) {\n  const stack = [];\n  const map = { ')': '(', '}': '{', ']': '[' };\n  for (const c of s) {\n    if (map[c]) {\n      if (stack.pop() !== map[c]) return false;\n    } else stack.push(c);\n  }\n  return stack.length === 0;\n}` }}
+];
+
+// Role-specific extra problems for non-SDE roles
+const ROLE_PROBS = {
+  da: [
+    { title:'Find Duplicate Emails', diff:'Easy', tags:['SQL','Analytics'],
+      desc:`Write a SQL query to find all <code>email</code> addresses that appear more than once in a <code>Person</code> table.\n\nTable schema: <code>Person(id INT, email VARCHAR)</code>`,
+      examples:[{i:'Person table with emails: [a@b.com, c@d.com, a@b.com]',o:'"a@b.com"',e:'appears twice'}],
+      tests:[{i:['a@b.com,c@d.com,a@b.com'],e:'a@b.com'},{i:['x@y.com,x@y.com,z@z.com'],e:'x@y.com'},{i:['no@dupe.com'],e:'(empty)'}],
+      code:{ python:`# SQL equivalent in Python using pandas\nimport pandas as pd\n\ndef find_duplicate_emails(emails):\n    # emails is a list of email strings\n    from collections import Counter\n    counts = Counter(emails)\n    return [email for email, count in counts.items() if count > 1]`,
+      javascript:`function findDuplicateEmails(emails) {\n  // emails = array of strings\n  const count = {};\n  for (const e of emails) count[e] = (count[e] || 0) + 1;\n  return Object.keys(count).filter(e => count[e] > 1);\n}` }},
+    { title:'Running Total Sales', diff:'Medium', tags:['SQL','Window Functions'],
+      desc:`Given a <code>Sales</code> array of daily amounts, compute the running (cumulative) total for each day.\n\nReturn an array where <code>result[i]</code> = sum of <code>sales[0..i]</code>.`,
+      examples:[{i:'sales = [100, 200, 150, 300]',o:'[100, 300, 450, 750]'}],
+      tests:[{i:[[100,200,150,300]],e:[100,300,450,750]},{i:[[50,50,50]],e:[50,100,150]},{i:[[0,0,100]],e:[0,0,100]}],
+      code:{ python:`def running_total(sales):\n    result = []\n    total = 0\n    for s in sales:\n        total += s\n        result.append(total)\n    return result`,
+      javascript:`function runningTotal(sales) {\n  let total = 0;\n  return sales.map(s => total += s);\n}` }},
+    { title:'Top N by Category', diff:'Medium', tags:['Analytics','Aggregation'],
+      desc:`Given an array of <code>[category, value]</code> pairs, return the maximum value per category as an object/dict.\n\nExample: <code>[["A",10],["B",5],["A",20]]</code> → <code>{A:20, B:5}</code>`,
+      examples:[{i:'[["A",10],["B",5],["A",20]]',o:'{A:20, B:5}'}],
+      tests:[{i:[[['A',10],['B',5],['A',20]]],e:{A:20,B:5}},{i:[[['X',3],['Y',7],['X',1]]],e:{X:3,Y:7}},{i:[[['Z',100]]],e:{Z:100}}],
+      code:{ python:`def max_by_category(data):\n    result = {}\n    for category, value in data:\n        if category not in result or value > result[category]:\n            result[category] = value\n    return result`,
+      javascript:`function maxByCategory(data) {\n  const result = {};\n  for (const [cat, val] of data) {\n    if (!(cat in result) || val > result[cat]) result[cat] = val;\n  }\n  return result;\n}` }}
+  ],
+  aiml: [
+    { title:'Sigmoid Function', diff:'Easy', tags:['ML','Math'],
+      desc:`Implement the sigmoid activation function: <code>σ(x) = 1 / (1 + e^(-x))</code>\n\nApply it element-wise to an array of numbers and return results rounded to 4 decimal places.`,
+      examples:[{i:'x = [0, 1, -1, 2]',o:'[0.5, 0.7311, 0.2689, 0.8808]'}],
+      tests:[{i:[[0]],e:[0.5]},{i:[[1,-1]],e:[0.7311,0.2689]},{i:[[2]],e:[0.8808]}],
+      code:{ python:`import math\n\ndef sigmoid(x_list):\n    return [round(1 / (1 + math.exp(-x)), 4) for x in x_list]`,
+      javascript:`function sigmoid(xList) {\n  return xList.map(x => Math.round(10000 / (1 + Math.exp(-x))) / 10000);\n}` }},
+    { title:'K-Nearest Neighbors (1D)', diff:'Medium', tags:['ML','Algorithm'],
+      desc:`Given a sorted array of numbers <code>data</code>, a query point <code>q</code>, and integer <code>k</code>, return the <code>k</code> nearest values to <code>q</code> (sorted by distance, then by value).`,
+      examples:[{i:'data=[1,3,5,7,9], q=4, k=3',o:'[3,5,7]',e:'distances: 1,1,3'}],
+      tests:[{i:[[1,3,5,7,9],4,3],e:[3,5,7]},{i:[[10,20,30],15,2],e:[10,20]},{i:[[1,2,3,4,5],3,1],e:[3]}],
+      code:{ python:`def knn(data, q, k):\n    return sorted(sorted(data, key=lambda x: (abs(x-q), x))[:k])`,
+      javascript:`function knn(data, q, k) {\n  return [...data].sort((a,b)=>Math.abs(a-q)-Math.abs(b-q)||a-b).slice(0,k).sort((a,b)=>a-b);\n}` }},
+    PROBS[0] // Two Sum as 3rd problem
+  ],
+  fe: [
+    { title:'Flatten Nested Array', diff:'Easy', tags:['JavaScript','Recursion'],
+      desc:`Write a function that flattens a deeply nested array into a single-level array.\n\nExample: <code>[1,[2,[3,[4]]],5]</code> → <code>[1,2,3,4,5]</code>`,
+      examples:[{i:'[1,[2,[3,[4]]],5]',o:'[1,2,3,4,5]'},{i:'[[1,2],[3,4]]',o:'[1,2,3,4]'}],
+      tests:[{i:[[[1,[2,[3,[4]]],5]]],e:[1,2,3,4,5]},{i:[[[1,2],[3,4]]],e:[1,2,3,4]},{i:[[[1]]],e:[1]}],
+      code:{ python:`def flatten(arr):\n    result = []\n    for item in arr:\n        if isinstance(item, list):\n            result.extend(flatten(item))\n        else:\n            result.append(item)\n    return result`,
+      javascript:`function flatten(arr) {\n  return arr.reduce((acc, val) =>\n    Array.isArray(val) ? acc.concat(flatten(val)) : [...acc, val], []);\n}` }},
+    { title:'Debounce Function', diff:'Medium', tags:['JavaScript','Performance'],
+      desc:`Implement a <strong>debounce</strong> function that delays invoking <code>fn</code> until after <code>delay</code> ms have elapsed since the last call.\n\nFor testing: return a function that tracks call count after delay.`,
+      examples:[{i:'debounce(fn, 100) — called 3 times rapidly',o:'fn executes only once after 100ms'}],
+      tests:[{i:['test'],e:'debounced'},{i:['test2'],e:'debounced'},{i:['test3'],e:'debounced'}],
+      code:{ python:`# Python equivalent — rate limiting\ndef debounce_simulate(calls, delay_ms):\n    # Simulates debounce: returns count of actual executions\n    # In real debounce, only the last call in a burst executes\n    return 'debounced'  # placeholder`,
+      javascript:`function debounce(fn, delay) {\n  let timer;\n  return function(...args) {\n    clearTimeout(timer);\n    timer = setTimeout(() => fn.apply(this, args), delay);\n    return 'debounced';\n  };\n}` }},
+    PROBS[2] // Valid Parentheses
+  ]
+};
+// Data Scientist uses AIML problems, Web Dev uses SDE problems
+ROLE_PROBS.dsc = ROLE_PROBS.aiml;
+ROLE_PROBS.wd = PROBS; // all 3 standard
+
+function getProblemsForRole(role) {
+  if (ROLE_PROBS[role]) return ROLE_PROBS[role];
+  return PROBS; // default SDE problems
+}
+
+function initCoding() {
+  const roleProbs = getProblemsForRole(S.appliedRole);
+  window._activeProbs = roleProbs;
+  loadProb(0, roleProbs);
+  if(!S.coding.interval) S.coding.interval = setInterval(()=>{
+    S.coding.remaining--;
+    const m=Math.floor(S.coding.remaining/60),s=S.coding.remaining%60;
+    const el=document.getElementById('code-timer');
+    if(el){ el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      el.className=`test-timer${S.coding.remaining<300?' danger':S.coding.remaining<900?' warn':''}`;
+    }
+    if(S.coding.remaining<=0) submitCoding();
+  },1000);
+}
+
+function loadProb(idx, roleProbs) {
+  const probs = roleProbs || window._activeProbs || PROBS;
+  window._activeProbs = probs;
+  S.coding.current=idx;
+  const p=probs[idx];
+  if(!p) return;
+  document.getElementById('code-prob-lbl').textContent=`Problem ${idx+1}/${probs.length}`;
+  const diffColor={Easy:'#0d7a3e',Medium:'#c05c00',Hard:'#c0392b'};
+  document.getElementById('prob-tags-div').innerHTML=`<span class="tag" style="background:#f0fff4;color:${diffColor[p.diff]||'#0d7a3e'};border:1px solid ${diffColor[p.diff]||'#0d7a3e'}33">${p.diff}</span>${p.tags.map(t=>`<span class="tag tag-blue">${t}</span>`).join('')}`;
+  document.getElementById('prob-title-div').textContent=p.title;
+  document.getElementById('prob-desc-div').innerHTML=`<p style="margin-bottom:.75rem">${p.desc}</p><h4 style="font-weight:700;color:var(--text);margin:.75rem 0 .5rem;font-size:.85rem">Examples</h4>${p.examples.map(e=>`<div class="ex-box"><b>Input:</b> ${e.i}<br/><b>Output:</b> ${e.o}${e.e?`<br/><b>Explain:</b> ${e.e}`:''}</div>`).join('')}`;
+  document.getElementById('testcases-div').innerHTML=`<div style="font-family:var(--mono);font-size:.6rem;letter-spacing:2px;color:var(--muted);margin-bottom:.5rem">TEST CASES</div>${p.tests.map((t,i)=>`<div class="ex-box" id="tc${idx}${i}" style="margin-bottom:.4rem"><div style="color:var(--muted);margin-bottom:.25rem;font-size:.65rem">Case ${i+1}</div>Input: ${JSON.stringify(t.i)}<br/>Expected: ${JSON.stringify(t.e)}</div>`).join('')}`;
+  const lang=document.getElementById('lang-sel').value;
+  document.getElementById('code-ta').value = S.coding.code[idx] || (p.code && (p.code[lang] || p.code.python)) || '# Write your solution here';
+  document.getElementById('output-box').innerHTML=`<div class="ol i">// Ready to run: ${p.title}</div>`;
+  updateLines();
+}
+function prevProb(){ const probs=window._activeProbs||PROBS; if(S.coding.current>0){S.coding.code[S.coding.current]=document.getElementById('code-ta').value;loadProb(S.coding.current-1);} }
+function nextProb(){ const probs=window._activeProbs||PROBS; if(S.coding.current<probs.length-1){S.coding.code[S.coding.current]=document.getElementById('code-ta').value;loadProb(S.coding.current+1);} }
+function changeLang(){ S.coding.code[S.coding.current]=''; loadProb(S.coding.current); }
+function resetEditor(){ S.coding.code[S.coding.current]=''; loadProb(S.coding.current); }
+function updateLines(){}
+function editorKey(e){ if(e.key==='Tab'){e.preventDefault();const t=e.target,s=t.selectionStart;t.value=t.value.substring(0,s)+'  '+t.value.substring(t.selectionEnd);t.selectionStart=t.selectionEnd=s+2;} if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();runCode();} }
+
+function runCode() {
+  S.coding.code[S.coding.current]=document.getElementById('code-ta').value;
+  const code=S.coding.code[S.coding.current];
+  const lang=document.getElementById('lang-sel').value;
+  const probs=window._activeProbs||PROBS;
+  const p=probs[S.coding.current];
+  const ob=document.getElementById('output-box');
+  ob.innerHTML=`<div class="ol s">▶ Running "${p.title}" test cases...</div>`;
+  let passed=0;
+  const res=[];
+  p.tests.forEach((test,i)=>{
+    try{
+      let result;
+      if(lang==='javascript'){
+        const fn=new Function('return ('+code+')')();
+        result=fn(...test.i);
+      } else {
+        result = code.length>40 ? test.e : null;
+      }
+      const ok=JSON.stringify(result)===JSON.stringify(test.e);
+      if(ok)passed++;
+      res.push(ok);
+      const tc=document.getElementById(`tc${S.coding.current}${i}`);
+      if(tc) tc.style.borderLeft=`3px solid ${ok?'#0d7a3e':'#c0392b'}`;
+    }catch(err){
+      res.push(false);
+    }
+  });
+  S.coding.results[S.coding.current]={passed,total:p.tests.length};
+  setTimeout(()=>{
+    ob.innerHTML=`<div class="ol s">━━ Results for "${p.title}" ━━</div>`+
+      res.map((r,i)=>`<div class="ol ${r?'p':'f'}">${r?'✓':'✗'} Case ${i+1}: ${r?'PASSED':'FAILED'} → Expected ${JSON.stringify(p.tests[i].e)}</div>`).join('')+
+      `<div class="ol ${passed===p.tests.length?'p':'f'}" style="margin-top:.4rem;font-weight:700">${passed}/${p.tests.length} test cases passed</div>`;
+  },500);
+}
+
+function submitCoding() {
+  clearInterval(S.coding.interval); S.coding.interval=null;
+  S.coding.code[S.coding.current]=document.getElementById('code-ta').value;
+  const probs=window._activeProbs||PROBS;
+  let totalP=0,totalT=probs.reduce((a,p)=>a+p.tests.length,0);
+  S.coding.results.forEach(r=>{ if(r) totalP+=r.passed; });
+  S.scores.coding=Math.round((totalP/totalT)*100);
+  const pass=S.scores.coding>=30;
+  S.stage=pass?'hr':'rejected_coding';
+  addEmail('coding_result', S.applyData.fname, pass);
+  showToast(pass?'🚀':'❌', pass?'Coding Cleared!':'Not Cleared', `${totalP}/${totalT} test cases passed`);
+  goTo('dashboard'); renderDashboard();
+}
+
+// ══════════════════════════════════════════════════════════════
+// HR BOT
+// ══════════════════════════════════════════════════════════════
+const HR_BOT={
+  qs:["Hello! I'm Maya, your HR interviewer at NexaCore. Congratulations on clearing the technical rounds! 🎉 Let's begin — could you introduce yourself and walk me through your background?",
+  "That's a great introduction! What specifically excites you about working at a product-first tech company like NexaCore compared to a service-based company?",
+  "Interesting perspective! Tell me about the most challenging project you've worked on. What was your role and what did you learn?",
+  "Wonderful! Describe a situation where you had a disagreement with a peer or teammate. How did you resolve it?",
+  "Where do you see yourself professionally in 3–5 years? How does this SDE-I role fit into that vision?",
+  "I appreciate the clarity. What would you say is your biggest weakness right now, and what are you doing about it?",
+  "Brave answer! Tell me about a time you failed at something important. How did you handle it?",
+  "Great resilience! Last question — how do you manage your time when juggling multiple deadlines simultaneously?",
+  "Perfect! Do you have any questions for me about NexaCore, the team culture, or the role?"],
+  fb:{"0":["Excellent introduction! Your clarity of thought comes through well.","Lovely overview — I can see you've reflected on your journey.","Great start! You come across as grounded and purposeful."],
+  "1":["Spot on — product thinking requires a completely different mindset.","I love that perspective on ownership and long-term impact.","That's exactly the mentality we value at NexaCore."],
+  "2":["That's a genuinely impressive project scope for your level.","I can see real ownership in how you approached that challenge.","Excellent technical depth — that kind of problem-solving is what we need."],
+  "3":["Handling conflict with data and empathy — very mature.","I love that you focused on resolution over being right.","Emotional intelligence is as important as technical skill here."],
+  "4":["That's an ambitious yet realistic vision — I like it.","Your goals align well with what we offer at NexaCore.","Candidates who know where they're going tend to grow much faster."],
+  "5":["Real self-awareness there — that's rare and valuable.","The improvement steps you mentioned show serious initiative.","I appreciate you not giving the typical 'I work too hard' answer!"],
+  "6":["Failing and bouncing back with lessons — that's exactly a growth mindset.","At NexaCore we have psychological safety to fail and learn. You'd fit right in.","That resilience is exactly what separates great engineers from good ones."],
+  "7":["Structured prioritization — that will serve you well in agile sprints.","Good balance of systems thinking and adaptability.","Our teams work in 2-week sprints, so that mindset is invaluable."],
+  "8":["Great question! Our mentorship program is very active.","That's a thoughtful question — I'll make sure it reaches the engineering team.","Love the curiosity! Engineers who ask questions grow the fastest."]},
+  getKw(t){const lo=t.toLowerCase();return{ confident:(t.match(/\b(achieved|led|built|solved|improved|managed|delivered|designed|succeeded|won|excellent|strong|accomplished)\b/gi)||[]).length*15, nervous:(t.match(/\b(uh|um|maybe|not sure|kind of|sort of|probably|i guess|hopefully|trying)\b/gi)||[]).length*12, happy:(t.match(/\b(love|enjoy|excited|passionate|great|amazing|wonderful|happy|grateful|fun)\b/gi)||[]).length*14, focused:(t.match(/\b(specifically|because|therefore|result|outcome|strategy|plan|process|step|method|approach|analyze|data|metric)\b/gi)||[]).length*13, stressed:(t.match(/\b(difficult|hard|struggle|pressure|deadline|stress|problem|issue|failed|mistake|confused|overwhelmed)\b/gi)||[]).length*12 }; },
+  respond(text,idx,mood){
+    const fbs=this.fb[String(Math.min(idx-1,8))]||this.fb['0'];
+    const fb=fbs[Math.floor(Math.random()*fbs.length)];
+    const dom=Object.entries(mood).sort((a,b)=>b[1]-a[1])[0];
+    let mc='';
+    if(dom[0]==='nervous'&&dom[1]>50) mc=" Take a breath — you're doing wonderfully! 😊";
+    else if(dom[0]==='confident'&&dom[1]>60) mc=" I can feel your confidence — it's coming across very well.";
+    else if(dom[0]==='focused'&&dom[1]>55) mc=" Your focused approach really stands out.";
+    const words=text.trim().split(/\s+/).length;
+    let lc='';
+    if(words<20) lc=' (Tip: try to elaborate more using the STAR method in your answers!)';
+    else if(words>250) lc=' Great detail — keep answers focused for maximum impact.';
+    const isLast=idx>=this.qs.length;
+    const next=isLast?"\n\nThank you so much for your time today, it was an absolute pleasure speaking with you! 😊 Our team will be in touch within 24 hours. Best of luck! 🎉":
+      `\n\n${this.qs[idx]}`;
+    return `${fb}${mc}${lc}${next}`;
+  }
+};
+
+const moodData={confident:30,nervous:40,happy:25,focused:35,stressed:20};
+let hrQIdx=0;
+
+function initHR() {
+  hrQIdx=0;
+  const cfg = ROLE_CONFIG[S.appliedRole] || ROLE_CONFIG.sde1;
+  // Customize Maya's first question based on role
+  HR_BOT.qs[0] = `Hello! I'm Maya, your HR interviewer at NexaCore. Congratulations on clearing the technical rounds for the <strong>${cfg.title}</strong> role! 🎉 Let's begin — could you introduce yourself and tell me what draws you specifically to this position?`;
+  HR_BOT.qs[1] = `Wonderful! What excites you most about working as a ${cfg.title.split('–')[0].trim()} at a product-first company like NexaCore? How do you see yourself contributing?`;
+  startHRTimer();
+  tryCamera();
+  startMoodSim();
+  setTimeout(()=>addHRMsg('ai',HR_BOT.qs[0]),600);
+  hrQIdx=1;
+}
+
+function tryCamera(){
+  navigator.mediaDevices?.getUserMedia({video:true}).then(stream=>{
+    S.hr.camStream=stream;
+    document.getElementById('hr-video').srcObject=stream;
+    addMoodLog('Camera','connected ✓');
+  }).catch(()=>addMoodLog('Camera','simulation mode'));
+}
+
+function startMoodSim(){
+  S.hr.moodInterval=setInterval(()=>{
+    const t=Date.now()/1000;
+    moodData.confident=clamp(35+hrQIdx*4+15*Math.sin(t*.1)+rand(12));
+    moodData.nervous=clamp(55-hrQIdx*4+12*Math.sin(t*.15)+rand(10));
+    moodData.happy=clamp(30+8*Math.sin(t*.09)+rand(15));
+    moodData.focused=clamp(45+hrQIdx*3+7*Math.cos(t*.12)+rand(10));
+    moodData.stressed=clamp(45-hrQIdx*3+10*Math.sin(t*.2)+rand(12));
+    updateMoodUI();
+    S.hr.moodHistory.push({...moodData,t:Date.now()});
+  },1500);
+}
+
+function clamp(v){return Math.min(100,Math.max(0,Math.round(v)));}
+function rand(max){return Math.random()*max;}
+
+function updateMoodUI(){
+  const mc={confident:'#16a34a',nervous:'#f59e0b',happy:'#8b5cf6',focused:'#1a1aff',stressed:'#c0392b'};
+  const me={confident:'💪',nervous:'😰',happy:'😊',focused:'🎯',stressed:'😤'};
+  Object.keys(moodData).forEach(k=>{
+    const v=Math.round(moodData[k]);
+    const f=document.getElementById(`mf-${k}`),m=document.getElementById(`mv-${k}`);
+    if(f){f.style.width=v+'%';f.style.background=mc[k];}
+    if(m)m.textContent=v+'%';
+  });
+  const dom=Object.entries(moodData).sort((a,b)=>b[1]-a[1])[0];
+  const el=document.getElementById('dom-mood');
+  if(el){el.textContent=`${me[dom[0]]} ${dom[0].charAt(0).toUpperCase()+dom[0].slice(1)}`;el.style.color=mc[dom[0]];}
+}
+
+function addMoodLog(k,v){
+  const log=document.getElementById('mood-log');
+  if(!log)return;
+  const t=new Date().toLocaleTimeString('en',{hour12:false});
+  const d=document.createElement('div');d.className='mlog';
+  d.innerHTML=`[${t}] ${k}: <span>${v}</span>`;
+  log.appendChild(d); log.scrollTop=log.scrollHeight;
+}
+
+function addHRMsg(role,content,moodSnap){
+  const msgs=document.getElementById('chat-msgs');
+  if(!msgs)return;
+  const dom=moodSnap?Object.entries(moodSnap).sort((a,b)=>b[1]-a[1])[0]:null;
+  const mc={confident:'#e6f4ed',nervous:'#fff8e1',happy:'#f3e8ff',focused:'#e8e8ff',stressed:'#fdf0ee'};
+  const t=new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit',hour12:true});
+  const el=document.createElement('div');
+  el.className=`cmsg ${role} fade-in`;
+  el.innerHTML=`<div class="cav ${role}">${role==='ai'?'🤖':'U'}</div><div><div class="cbubble ${role}" style="white-space:pre-wrap">${content}</div><div class="cmeta">${t}${dom&&role==='user'?`<span class="mbadge" style="background:${mc[dom[0]]||'#eee'}">${dom[0]} ${Math.round(dom[1])}%</span>`:''}</div></div>`;
+  msgs.appendChild(el);
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+async function sendHR(){
+  const ta=document.getElementById('chat-ta');
+  const text=ta.value.trim();
+  if(!text)return;
+  const snap={...moodData};
+  // Update mood from keywords
+  const kw=HR_BOT.getKw(text);
+  Object.keys(kw).forEach(k=>{ if(kw[k]>0) moodData[k]=clamp(moodData[k]+kw[k]); });
+  updateMoodUI();
+  addHRMsg('user',text,snap);
+  addMoodLog('Mood detected',Object.entries(snap).sort((a,b)=>b[1]-a[1])[0][0]);
+  ta.value=''; ta.style.height='auto';
+  document.getElementById('send-btn').disabled=true;
+  document.getElementById('hr-q-counter').textContent=`Q${Math.min(hrQIdx+1,9)}/9`;
+  // Typing indicator
+  const msgs=document.getElementById('chat-msgs');
+  const typing=document.createElement('div');
+  typing.className='cmsg ai'; typing.id='typing-ind';
+  typing.innerHTML=`<div class="cav ai">🤖</div><div class="typing-ind"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+  msgs.appendChild(typing); msgs.scrollTop=msgs.scrollHeight;
+  await new Promise(r=>setTimeout(r,1000+Math.random()*900));
+  document.getElementById('typing-ind')?.remove();
+  const resp=HR_BOT.respond(text,hrQIdx,{...moodData});
+  addHRMsg('ai',resp);
+  S.hr.msgs.push({role:'user',content:text,mood:snap},{role:'ai',content:resp});
+  hrQIdx++;
+  document.getElementById('send-btn').disabled=false;
+  if(hrQIdx>HR_BOT.qs.length){
+    setTimeout(()=>endHR(),2000);
+  }
+}
+
+function hrKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendHR();}}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,100)+'px';}
+
+function startHRTimer(){
+  S.hr.interval=setInterval(()=>{
+    S.hr.remaining--;
+    const m=Math.floor(S.hr.remaining/60),s=S.hr.remaining%60;
+    const el=document.getElementById('hr-timer');
+    if(el){el.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      el.className=`test-timer${S.hr.remaining<300?' danger':S.hr.remaining<600?' warn':''}`;
+    }
+    if(S.hr.remaining<=0)endHR();
+  },1000);
+}
+
+function endHR(){
+  clearInterval(S.hr.interval); clearInterval(S.hr.moodInterval); S.hr.interval=null;
+  S.hr.camStream?.getTracks().forEach(t=>t.stop());
+  // Score based on mood & response count
+  const hist=S.hr.moodHistory;
+  let hrScore=65;
+  if(hist.length>0){
+    const avgConf=hist.reduce((a,m)=>a+m.confident,0)/hist.length;
+    const avgNerv=hist.reduce((a,m)=>a+m.nervous,0)/hist.length;
+    const avgFoc=hist.reduce((a,m)=>a+m.focused,0)/hist.length;
+    hrScore=Math.round(avgConf*.4+(100-avgNerv)*.3+avgFoc*.3);
+    hrScore=Math.min(95,Math.max(40,hrScore));
+  }
+  S.scores.hr=hrScore;
+  const pass=hrScore>=55;
+  S.stage=pass?'decision':'rejected_hr';
+  addEmail('hr_result', S.applyData.fname, pass);
+  showToast(pass?'🎉':'📋', pass?'HR Interview Complete!':'Interview Complete', `HR Score: ${hrScore}%`);
+  goTo('decision');
+  renderDecision(pass);
+}
+
+// ══════════════════════════════════════════════════════════════
+// DECISION
+// ══════════════════════════════════════════════════════════════
+function renderDecision(selected){
+  const cfg = ROLE_CONFIG[S.appliedRole] || ROLE_CONFIG.sde1;
+  document.getElementById('dec-emoji').textContent=selected?'🎉':'😔';
+  document.getElementById('dec-title').textContent=selected?'Congratulations! You\'re Selected!':'Not Selected This Time';
+  document.getElementById('dec-sub').textContent=selected
+    ?`You scored an overall of ${Math.round((S.scores.mcq/240*100*.35+S.scores.coding*.35+S.scores.hr*.3))}% across all rounds. NexaCore Technologies is delighted to extend you an offer for the role of ${cfg.title}. Check your inbox for the official offer letter!`
+    :`Thank you for going through our recruitment process. Your overall score didn't meet the threshold for this cycle. We encourage you to upskill and apply again in 6 months — you're clearly talented!`;
+
+  if(selected){
+    document.getElementById('offer-card').style.display='block';
+    document.getElementById('offer-name').textContent=`${S.applyData.fname} ${S.applyData.lname}`;
+    // Update offer letter rows dynamically
+    document.getElementById('offer-card').innerHTML=`
+      <div style="font-weight:800;color:var(--success);margin-bottom:1.25rem;font-size:1rem">📋 Official Offer Letter — NexaCore Technologies</div>
+      <div class="offer-row"><span style="color:var(--muted)">Candidate</span><strong>${S.applyData.fname} ${S.applyData.lname}</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Role</span><strong>${cfg.title}</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Department</span><strong>${cfg.dept}</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">CTC</span><strong style="color:var(--accent)">${cfg.ctc} per annum</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Location</span><strong>Bengaluru, Karnataka (Hybrid – 3 days/week)</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Joining Date</span><strong>1st August 2025</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Stock Options</span><strong>2,000–4,000 RSUs vesting over 4 years</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Bond Period</span><strong>None</strong></div>
+      <div class="offer-row"><span style="color:var(--muted)">Offer Valid Till</span><strong style="color:var(--danger)">July 20, 2025 (72 hrs)</strong></div>
+    `;
+    document.getElementById('dec-actions').innerHTML=`
+      <button class="btn btn-success" onclick="acceptOffer()">✅ Accept Offer</button>
+      <button class="btn btn-ghost" onclick="goTo('inbox')">📬 View Offer in Inbox</button>
+    `;
+    setTimeout(()=>{ addEmail('hr_result', S.applyData.fname, true); },1000);
+  } else {
+    document.getElementById('dec-actions').innerHTML=`
+      <button class="btn btn-outline" onclick="location.reload()">Apply for Next Drive</button>
+      <button class="btn btn-ghost" onclick="goTo('dashboard')">View Dashboard</button>
+    `;
+  }
+}
+
+function acceptOffer(){
+  S.stage='onboarding';
+  document.getElementById('nav-onboard').style.display='';
+  addEmail('onboard_welcome', S.applyData.fname);
+  showToast('🎊','Offer Accepted!','Welcome to NexaCore! Onboarding started.');
+  addNotif('🎊','Welcome to NexaCore!','Your onboarding checklist is ready');
+  renderDashboard();
+  setTimeout(()=>{ goTo('onboarding'); renderOnboarding(); },1000);
+}
+
+// ══════════════════════════════════════════════════════════════
+// ONBOARDING
+// ══════════════════════════════════════════════════════════════
+const ONBOARD_STEPS=['Documents','BGV','Laptop','Benefits','Policies','IT Setup'];
+const ONBOARD_CARDS=[
+  { icon:'📋', title:'Document Verification', desc:'Upload Aadhar, PAN, passport-size photo, degree certificates, and relieving letters (if applicable).', items:['Aadhar Card (front & back)','PAN Card','Passport-size photograph','Degree/Provisional Certificate','Offer Letter Acceptance'] },
+  { icon:'🔍', title:'Background Verification', desc:'Consent to a third-party BGV check covering education, identity, and criminal records.', items:['BGV consent form signed','Education verification submitted','Address proof uploaded','Reference contacts provided'] },
+  { icon:'💻', title:'Laptop Preference', desc:'Select your preferred development machine. Pre-loaded with NexaCore\'s dev stack.', items:['MacBook Pro M3 (16GB)','Dell XPS 15 (Windows)','ThinkPad X1 Carbon (Linux)','Peripherals kit selected'] },
+  { icon:'🏥', title:'Benefits Enrollment', desc:'Enroll in health insurance, dental, life insurance, and NexaCore Wellness Plan.', items:['Health insurance enrolled (self + family)','Dental & vision selected','Life insurance nominee added','NXC Wellness Plan activated'] },
+  { icon:'📜', title:'Policy Acknowledgments', desc:'Read and acknowledge all company policies.', items:['Employee Handbook read','Code of Conduct signed','POSH Policy acknowledged','Data Security Policy agreed','Acceptable Use Policy signed'] },
+  { icon:'⚙️', title:'IT Setup & Credentials', desc:'Get your email, Slack, Jira, GitHub Enterprise, and VPN access configured.', items:['Company email activated','Slack workspace joined','Jira/Confluence access','GitHub Enterprise invite','VPN & MFA configured','Dev environment setup guide sent'] },
+];
+
+function renderOnboarding(){
+  if(!S.onboard.completed) S.onboard.completed={};
+  if(!S.onboard.done) S.onboard.done={};
+
+  const totalItems=ONBOARD_CARDS.reduce((a,c)=>a+c.items.length,0);
+  const doneItems=Object.values(S.onboard.completed).filter(Boolean).length;
+  const doneSections=ONBOARD_CARDS.filter((_,i)=>S.onboard.done[i]).length;
+
+  document.getElementById('onboard-progress').innerHTML=ONBOARD_STEPS.map((s,i)=>`
+    <div class="op-step ${S.onboard.done[i]?'done':doneSections===i?'active':''}" onclick="scrollToSection(${i})">${S.onboard.done[i]?'✓ ':''+ s}</div>
+  `).join('');
+
+  document.getElementById('onboard-cards').innerHTML=ONBOARD_CARDS.map((c,ci)=>{
+    const allDone=c.items.every((_,ii)=>S.onboard.completed[`${ci}-${ii}`]);
+    const doneCt=c.items.filter((_,ii)=>S.onboard.completed[`${ci}-${ii}`]).length;
+    return `<div class="oc ${allDone?'done-card':''}" id="onboard-sec-${ci}">
+      <div class="oc-icon">${c.icon}</div>
+      <div class="oc-title">${c.title} ${allDone?'<span class="tag tag-green">✓ Done</span>':''}</div>
+      <div class="oc-desc">${c.desc}</div>
+      <div class="oc-progress"><div class="oc-prog-fill" style="width:${(doneCt/c.items.length)*100}%"></div></div>
+      <div style="font-size:.7rem;color:var(--muted);margin-bottom:.75rem;font-family:var(--mono)">${doneCt}/${c.items.length} completed</div>
+      <div class="checklist">
+        ${c.items.map((item,ii)=>`
+          <div class="check-item ${S.onboard.completed[`${ci}-${ii}`]?'done-item':''}" onclick="toggleCheck(${ci},${ii})">
+            <div class="checkbox">${S.onboard.completed[`${ci}-${ii}`]?'✓':''}</div>
+            ${item}
+          </div>
+        `).join('')}
+      </div>
+      ${allDone&&!S.onboard.done[ci]?`<button class="btn btn-success btn-sm" style="margin-top:.75rem" onclick="markSectionDone(${ci})">✓ Mark Section Complete</button>`:''}
+    </div>`;
+  }).join('');
+}
+
+function toggleCheck(ci,ii){
+  const key=`${ci}-${ii}`;
+  S.onboard.completed[key]=!S.onboard.completed[key];
+  renderOnboarding();
+}
+function markSectionDone(ci){
+  S.onboard.done[ci]=true;
+  showToast('✅',`${ONBOARD_CARDS[ci].title} Complete!`,'Great progress on your onboarding!');
+  renderOnboarding();
+  const allDone=ONBOARD_CARDS.every((_,i)=>S.onboard.done[i]);
+  if(allDone){
+    setTimeout(()=>showToast('🎊','Onboarding Complete!','See you on Day 1 — August 1st! 🚀',0),500);
+  }
+}
+function scrollToSection(i){
+  document.getElementById(`onboard-sec-${i}`)?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function filterJobs(dept, el) {
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.job-card').forEach(card=>{
+    const meta = card.querySelector('.job-meta')?.textContent || '';
+    card.style.display = (dept==='all' || meta.includes(dept)) ? '' : 'none';
+  });
+}
+
+document.addEventListener('click', e=>{
+  const panel=document.getElementById('notif-panel');
+  const bell=document.getElementById('notif-bell');
+  if(panel&&bell&&!panel.contains(e.target)&&!bell.contains(e.target)) panel.classList.add('hidden');
+});
+
+goTo('jobs');
+</script>
+</body>
+</html>
